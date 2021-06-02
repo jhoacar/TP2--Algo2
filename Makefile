@@ -5,7 +5,9 @@ APP 		:= TP2
 #Nombre del fichero de salida ya compilado y enlazado
 CPP     	:= g++
 #Compilador del proyecto
-FLAGS 		:= -Wall -pedantic
+VALGRIND	:= valgrind --leak -check=full --track -origins=yes --show -reachable=yes
+#Depurador
+FLAGS 		:= -std=c++11 -Wall -Wconversion -limits -Werror -O0
 #Banderas de compilacion que muestran en detalle cada error
 MKDIR 		:= mkdir -p
 #Instruccion para crear carpetas y subcarpetas con el uso de -p
@@ -48,9 +50,11 @@ clean:
 	rm -i $(ALLOBJECTS)
 #Elimino cada archivo binario
 
+depuracion:
+	$(VALGRIND) ./$(APP)
+
 #PHONY es Util para que no sea dependiente y ejecute solo con instruccion make info
 .PHONY: info
-
 info:
 	$(shell echo -e" \n FICHEROS A COMPILAR: \n\n $(ALLCPPS) \n\n FICHEROS OBJETO: \n\n $(ALLOBJECTS) \n\n LINEA DE COMPILACION (LINKADO FINAL): \n\n $(CPP) -o $(APP) $(ALLOBJECTS)" )
 	

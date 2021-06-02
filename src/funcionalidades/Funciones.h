@@ -24,7 +24,7 @@ char caracter_mayuscula(char caracter){
 }
 
 string cadena_mayuscula(string cadena){
-	for(int i=0;i<cadena.length();i++)
+	for(size_t i=0;i<cadena.length();i++)
 		cadena[i]=caracter_mayuscula(cadena[i]);
 	return cadena;
 }
@@ -44,7 +44,6 @@ Lista<string> dividir_texto(string texto,const char delim){
 	stringstream buffer_texto(texto);
 	string cadena;
 	Lista<string> informacion;
-	size_t tope=0;
 	while(getline(buffer_texto,cadena,delim))
 		informacion.agregar(cadena);
 	return informacion;

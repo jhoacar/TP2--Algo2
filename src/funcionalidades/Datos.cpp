@@ -50,7 +50,7 @@ Datos::~Datos()
 }
 
 void Datos::cargar_tablero(){
-	for(int i=0;i<objetos.obtener_tamano();i++)
+	for(size_t i=0;i<objetos.obtener_tamano();i++)
 		tablero.cargar(objetos[i]);
 }
 void Datos::crear_tablero(string dimensiones){
@@ -59,7 +59,7 @@ void Datos::crear_tablero(string dimensiones){
 }
 
 void Datos::cargar_objetos(Lista<string> datos){
-	for(int i=1;i<datos.obtener_tamano();i++){
+	for(size_t i=1;i<datos.obtener_tamano();i++){
 		
 		Lista<string> linea = dividir_texto(datos[i],' ');
 		
@@ -103,7 +103,7 @@ void Datos::cargar_objetos(Lista<string> datos){
 
 int Datos::obtener_cantidad(type_info objeto){
 	int cont=0;
-	for(int i=0;i<objetos.obtener_tamano();i++){
+	for(size_t i=0;i<objetos.obtener_tamano();i++){
 		if(typeid(this->objetos[i])==objeto)
 			cont++;
 	}

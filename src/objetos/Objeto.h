@@ -9,7 +9,7 @@ class Objeto{
         string nombre;
         Coordenada posicion;
     public:
-        Objeto(Coordenada posicion,string nombre):posicion(posicion),nombre(nombre){
+        Objeto(Coordenada posicion,string nombre):nombre(nombre),posicion(posicion){
         }
         ~Objeto(){    
         }

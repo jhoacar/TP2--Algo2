@@ -18,8 +18,7 @@ class Lista
 		bool es_valido(const unsigned int indice);
 		Nodo<Dato>* buscar_nodo(const unsigned int indice);
 		Dato& operator[](const unsigned int indice);
-		Dato& operator=(const Dato datos[]);
-		Dato& operator=(const Lista);
+		void operator=(const Lista);
 		Dato& operator+=(const Dato datos[]);
 		Dato& operator+=(const Lista);
 	protected:
@@ -104,7 +103,7 @@ Dato& Lista<Dato>::operator+=(const Dato datos[]){
 }
 
 template <class Dato>
-Dato& Lista<Dato>::operator=(const Lista<Dato> lista){
+void Lista<Dato>::operator=(const Lista<Dato> lista){
 	this->inicio 	= lista.inicio;
 	this->fin 		= lista.fin;
 	this->tamano	= lista.tamano;
