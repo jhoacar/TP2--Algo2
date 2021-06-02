@@ -103,22 +103,12 @@ Dato& Lista<Dato>::operator+=(const Dato datos[]){
 	}
 }
 
-/*template <class Dato>
-Dato& Lista<Dato>::operator=(const Dato datos[]){
-	if(inicio!=nullptr)
-		delete this;
-	inicio=new Nodo<Dato>;
-	fin = inicio;
-	tamano=0;
-	int i=0;
-	
-	while(datos[i]){
-		agregar(datos[i]);
-		cout<<" Dato ("<<i<<") : "<<datos[i]<<endl;
-		i++;
-	}
+template <class Dato>
+Dato& Lista<Dato>::operator=(const Lista<Dato> lista){
+	this->inicio 	= lista.inicio;
+	this->fin 		= lista.fin;
+	this->tamano	= lista.tamano;
 }
-*/
 
 
 #endif

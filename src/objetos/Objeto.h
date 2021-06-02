@@ -11,7 +11,8 @@ class Objeto{
     public:
         Objeto(Coordenada posicion,string nombre):posicion(posicion),nombre(nombre){
         }
-        ~Objeto();
+        ~Objeto(){    
+        }
         virtual void mostrar()=0;
         Coordenada  obtener_posicion(){
             return posicion;
