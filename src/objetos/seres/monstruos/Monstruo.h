@@ -6,6 +6,7 @@
 class Monstruo : public Ser
 {
 	public:
+		Monstruo();
 		Monstruo(Coordenada posicion,std::string nombre);
 		~Monstruo();
 	protected:

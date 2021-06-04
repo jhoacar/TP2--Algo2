@@ -6,6 +6,7 @@
 class Ser : public Objeto
 {
 	public:
+		Ser();
 		Ser(Coordenada posicion,std::string nombre);
 		void mostrar();
 		~Ser();

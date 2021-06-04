@@ -6,6 +6,7 @@
 class Cruz : public Elemento
 {
 	public:
+		Cruz();
 		Cruz(Coordenada posicion,string nombre,int cantidad);
 		~Cruz();
 	protected:

@@ -2,6 +2,10 @@
 
 #include <iostream>
 
+Ser::Ser():Objeto(){
+
+}
+
 Ser::Ser(Coordenada posicion,string nombre):Objeto(posicion,nombre){
 	
 }

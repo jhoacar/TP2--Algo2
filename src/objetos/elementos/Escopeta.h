@@ -6,6 +6,7 @@
 class Escopeta : public Elemento
 {
 	public:
+		Escopeta();
 		Escopeta(Coordenada posicion,string nombre,int cantidad);
 		~Escopeta();
 	protected:

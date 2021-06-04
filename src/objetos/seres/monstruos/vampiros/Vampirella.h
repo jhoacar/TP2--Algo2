@@ -6,6 +6,7 @@
 class Vampirella : public Vampiro
 {
 	public:
+		Vampirella();
 		Vampirella(Coordenada posicion,std::string nombre);
 		~Vampirella();
 	protected:

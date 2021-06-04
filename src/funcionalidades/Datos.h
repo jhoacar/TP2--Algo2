@@ -12,14 +12,24 @@ class Datos
 {
 	Lista<Objeto *> objetos;
 	Tablero *tablero;
+
+	void crear_tablero(string dimensiones);
+	void cargar_objetos(Lista<string> datos);
+	void cargar_tablero();
+	
+	Objeto* crear_objeto(const int opcion,string nombre,Coordenada posicion,const int cantidad);
+	bool es_elemento(Objeto *objeto);
+
+	Coordenada convertir_posicion(Lista<string> datos);
+	string convertir_nombre(Lista<string> datos);
+	int convertir_cantidad(Lista<string> datos);
+
 	public:
-		Datos();
 		Datos(const string nombre_archivo);
 		~Datos();
-		void crear_tablero(string dimensiones);
-		void cargar_objetos(Lista<string> datos);
-		void cargar_tablero();
-		int obtener_cantidad(type_info objeto);	
+		void mostrar_resumen();
+		void mostrar_tablero();
+		int obtener_cantidad(const char *objeto);
 	protected:
 };
 

@@ -6,6 +6,7 @@
 class Bala : public Elemento
 {
 	public:
+		Bala();
 		Bala(Coordenada posicion,string nombre,int cantidad);
 		~Bala();
 	protected:

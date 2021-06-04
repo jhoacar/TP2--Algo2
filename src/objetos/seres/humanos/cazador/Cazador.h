@@ -6,6 +6,7 @@
 class Cazador : public Humano
 {
 	public:
+		Cazador();
 		Cazador(Coordenada posicion,string nombre);
 		~Cazador();
 	protected:

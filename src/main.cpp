@@ -11,6 +11,5 @@ int main(int argc, char *argv[]){
         archivo = argv[1];
     
     Datos datos(archivo);
-
-    cout<<"Datos cargados"<<endl;
+    datos.mostrar_resumen();
 }

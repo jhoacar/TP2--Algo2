@@ -6,6 +6,7 @@
 class Humano : public Ser
 {
 	public:
+		Humano();
 		Humano(Coordenada posicion,string nombre);
 		~Humano();
 	protected:

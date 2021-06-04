@@ -6,6 +6,7 @@
 class Zombie : public Monstruo
 {
 	public:
+		Zombie();
 		Zombie(Coordenada posicion,std::string nombre);
 		~Zombie();
 	protected:

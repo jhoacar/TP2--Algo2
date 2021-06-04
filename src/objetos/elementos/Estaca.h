@@ -5,6 +5,7 @@
 
 class Estaca : public Elemento{
 	public:
+		Estaca();
 		Estaca(Coordenada posicion,string nombre,int cantidad);
 		~Estaca();
 	protected:

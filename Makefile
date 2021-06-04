@@ -31,7 +31,7 @@ OBJSUBDIRS	:= $(patsubst $(SRC)%,$(OBJ)%,$(SUBDIRS))
 
 
 #Al ejecutar make, arrancara a realizar esta operacion
-$(APP): $(OBJSUBDIRS) $(ALLOBJECTS) $(HEADERS)
+$(APP): $(OBJSUBDIRS) $(ALLOBJECTS)
 	$(CPP) -o $(APP) $(ALLOBJECTS)
 #La cual se ejecutara cuando tengo resuelto todos los OBJETOS que son todos los *.o
 

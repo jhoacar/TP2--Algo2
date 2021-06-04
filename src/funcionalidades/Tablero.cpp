@@ -43,8 +43,9 @@ bool Tablero::posicion_valida(Coordenada posicion){
 }
 void Tablero::cargar(Objeto *objeto){
     Coordenada posicion = objeto->obtener_posicion();
-    if(posicion_valida(posicion)){
-        cout<<"Posicion Valida"<<endl;
-        //objetos[posicion.obtener_x()][posicion.obtener_y()]=objeto;
-    }
+    if(posicion_valida(posicion))
+        objetos[posicion.obtener_x()][posicion.obtener_y()]=objeto;
+}
+bool Tablero::existe_objeto(Coordenada posicion){
+    return posicion_valida(posicion) && objetos[posicion.obtener_x()][posicion.obtener_y()]!=nullptr;
 }
