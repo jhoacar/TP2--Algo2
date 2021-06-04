@@ -9,9 +9,6 @@ class Ser : public Objeto
 		Ser(Coordenada posicion,std::string nombre);
 		void mostrar();
 		~Ser();
-	protected:
-		std::string nombre;
-	
 };
 
 #endif

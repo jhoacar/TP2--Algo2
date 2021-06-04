@@ -5,7 +5,7 @@
 #include "Lista.h"
 class Tablero
 {
-	Lista<Objeto *> *objetos;
+	Objeto ***objetos;
 	int filas;
     int columnas;
 	public:

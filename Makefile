@@ -7,7 +7,8 @@ CPP     	:= g++
 #Compilador del proyecto
 VALGRIND	:= valgrind --leak -check=full --track -origins=yes --show -reachable=yes
 #Depurador
-FLAGS 		:= -std=c++11 -Wall -Wconversion -limits -Werror -O0
+FLAGS 		:= -ggdb -std=c++11
+#Banderas adicionales: -Wall -Wconversion -limits -Werror -O0 (Produce [-Werror=delete-non-virtual-dtor] al querer realizar  delete objetos[i][j] que es una clase abstracta)
 #Banderas de compilacion que muestran en detalle cada error
 MKDIR 		:= mkdir -p
 #Instruccion para crear carpetas y subcarpetas con el uso de -p
@@ -15,6 +16,7 @@ SRC 		:= src
 #Carpeta raiz del proyecto a compilar
 OBJ 		:= obj
 #Carpeta de almacenamiento de ficheros binarios para linkar
+HEADERS		:= ./src/funcionalidades/Funciones.h ./src/funcionalidades/Lista.h ./src/funcionalidades/Nodo.h ./src/objetos/Objeto.h
 
 ALLCPPS 	:= $(shell find src/ -type f -iname *.cpp)
 #Dado que se permite el uso de script shell realizamos la busqueda (find) en src 
@@ -29,7 +31,7 @@ OBJSUBDIRS	:= $(patsubst $(SRC)%,$(OBJ)%,$(SUBDIRS))
 
 
 #Al ejecutar make, arrancara a realizar esta operacion
-$(APP): $(OBJSUBDIRS) $(ALLOBJECTS)
+$(APP): $(OBJSUBDIRS) $(ALLOBJECTS) $(HEADERS)
 	$(CPP) -o $(APP) $(ALLOBJECTS)
 #La cual se ejecutara cuando tengo resuelto todos los OBJETOS que son todos los *.o
 
@@ -47,7 +49,7 @@ $(OBJSUBDIRS):
 #Creo las carpetas donde se guardaran todos los ficheros binarios
 
 clean:
-	rm -i $(ALLOBJECTS)
+	rm -f -r ./obj
 #Elimino cada archivo binario
 
 depuracion:

@@ -10,5 +10,5 @@ Ser::~Ser()
 {
 }
 void Ser::mostrar(){
-    std::cout<<nombre<<std::endl;
+    std::cout<<"Nombre: "<<this->nombre<<std::endl;
 }

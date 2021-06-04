@@ -5,7 +5,9 @@
 #include <fstream>
 #include <sstream>
 #include "Lista.h"
-
+#include <iostream>
+using std::cout;
+using std::endl;
 using std::string;
 using std::stringstream;
 using std::fstream;
@@ -29,18 +31,20 @@ string cadena_mayuscula(string cadena){
 	return cadena;
 }
 
-string obtener_texto(string nombre_fichero){
-	
+string obtener_texto(const string nombre_fichero){
+
 	fstream archivo(nombre_fichero.c_str(), fstream::in );
-	if(!archivo)
-		return nullptr;
+	if(!archivo){
+		cout<<"No se pudo abrir el fichero "<<nombre_fichero<<endl;
+		return "";
+	}
   	string datos_texto;
   	getline(archivo,datos_texto,'\0');
   	archivo.close();
   	return datos_texto;
 }
 
-Lista<string> dividir_texto(string texto,const char delim){
+Lista<string> dividir_texto(const string texto,const char delim){
 	stringstream buffer_texto(texto);
 	string cadena;
 	Lista<string> informacion;
@@ -51,13 +55,13 @@ Lista<string> dividir_texto(string texto,const char delim){
 
 string solo_numeros(string &cadena){
 	size_t i=0;
-	while (i < cadena.size()) {
-  		if (!isalnum(cadena[i]))	
+	while (i < cadena.length()) {
+  		if (!isdigit(cadena[i]))	
 		  cadena.erase(i,1);
 		else	
 			i++; // Incrementamos siempre que no eliminemos un caracter
   	}
-	return cadena;
+	return cadena.length() > 0 ? cadena : "-1"; //Si no habian numeros regresamos -1
 }
 int convertir_entero(string cadena){
 	return stoi(solo_numeros(cadena));

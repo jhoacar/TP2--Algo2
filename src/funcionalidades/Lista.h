@@ -17,10 +17,8 @@ class Lista
 		unsigned int obtener_tamano();
 		bool es_valido(const unsigned int indice);
 		Nodo<Dato>* buscar_nodo(const unsigned int indice);
-		Dato& operator[](const unsigned int indice);
+		Dato operator[](const unsigned int indice);
 		void operator=(const Lista);
-		Dato& operator+=(const Dato datos[]);
-		Dato& operator+=(const Lista);
 	protected:
 };
 
@@ -49,19 +47,16 @@ Lista<Dato>::Lista(const unsigned int tamano){
 template <class Dato>
 Lista<Dato>::~Lista()
 {
-	Nodo<Dato> *aux;
-	while(inicio!=nullptr){
-		aux = inicio->siguiente;
-		delete inicio;
-		inicio=aux;
-	}
+	delete inicio;	
 	inicio=nullptr;
+	fin=nullptr;
+	tamano=0;
 }
 template <class Dato>
 void Lista<Dato>::agregar(Dato dato){
 	fin->dato=dato;
-	fin->siguiente= new Nodo<Dato>();
-	fin=this->fin->siguiente;
+	fin->siguiente = new Nodo<Dato>();
+	fin=fin->siguiente;
 	tamano+=1;
 }
 template <class Dato>
@@ -70,7 +65,7 @@ unsigned int Lista<Dato>::obtener_tamano(){
 }
 template <class Dato>
 bool Lista<Dato>::es_valido(const unsigned int indice){
-	return indice>=0&&indice<tamano;
+	return indice>=0&&indice<=tamano;
 }
 
 template <class Dato>
@@ -89,17 +84,8 @@ Nodo<Dato>* Lista<Dato>::buscar_nodo(const unsigned int indice){
 }
 
 template <class Dato>
-Dato& Lista<Dato>::operator[](const unsigned int indice){
+Dato Lista<Dato>::operator[](const unsigned int indice){
 	return (buscar_nodo(indice))->dato;
-}
-
-template <class Dato>
-Dato& Lista<Dato>::operator+=(const Dato datos[]){
-	int i=0;
-	while(datos[i]!=nullptr){
-		agregar(datos[i]);
-		i++;
-	}
 }
 
 template <class Dato>

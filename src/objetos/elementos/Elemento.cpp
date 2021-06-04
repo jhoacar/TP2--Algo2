@@ -11,6 +11,6 @@ Elemento::~Elemento()
 
 }
 
-void Elemento::mostrar(){
-	std::cout<<nombre<<std::endl;
+void Elemento::mostrar(){	
+	std::cout<<"Nombre: "<<this->nombre<<" Cantidad: "<<this->cantidad<<std::endl;
 }

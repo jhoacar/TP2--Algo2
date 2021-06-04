@@ -23,7 +23,7 @@ using std::endl;
 
 const size_t MAX_OBJETOS = 12;
 const string CAZADOR = "CV";
-const string ELEMENTOS[MAX_OBJETOS]=	{"agua","bala","cruz","estaca","escopeta","humano","humano CV","Vanesa","Vampiro","Vampirella","Nosferatu","zombi"};
+const string ELEMENTOS[MAX_OBJETOS]=	{"agua","bala","cruz","estaca","escopeta","humano","humano CV","Vanesa","vampiro","Vampirella","Nosferatu","zombi"};
 const string NOMBRES[MAX_OBJETOS]=	{"a",	"b",	"c",	"e",	"E",		"h",		"H",	"W",		"v",		"V",		"N",	"z"};
 enum {AGUA=0,BALA,CRUZ,ESTACA,ESCOPETA,HUMANO,HUMANO_CAZADOR,VANESA,VAMPIRO,VAMPIRELLA,NOSFERATU,ZOMBIE};
 
@@ -31,7 +31,7 @@ enum {AGUA=0,BALA,CRUZ,ESTACA,ESCOPETA,HUMANO,HUMANO_CAZADOR,VANESA,VAMPIRO,VAMP
 Datos::Datos(){
 
 }
-Datos::Datos(string nombre_archivo)
+Datos::Datos(const string nombre_archivo)
 {
 	string texto = obtener_texto(nombre_archivo);
 	if(texto.length()==0)
@@ -46,31 +46,35 @@ Datos::Datos(string nombre_archivo)
 
 Datos::~Datos()
 {
-
+	delete tablero;
 }
 
 void Datos::cargar_tablero(){
-	for(size_t i=0;i<objetos.obtener_tamano();i++)
-		tablero.cargar(objetos[i]);
+	for(size_t i=0;i<objetos.obtener_tamano();i++){
+		tablero->cargar(objetos[i]);
+	}
 }
 void Datos::crear_tablero(string dimensiones){
 	Lista<string> datos = dividir_texto(dimensiones,' ');
-	tablero = Tablero(convertir_entero(datos[0]),convertir_entero(datos[1]));
+	tablero =new Tablero(convertir_entero(datos[0]),convertir_entero(datos[1]));
 }
 
 void Datos::cargar_objetos(Lista<string> datos){
+	
 	for(size_t i=1;i<datos.obtener_tamano();i++){
-		
+
 		Lista<string> linea = dividir_texto(datos[i],' ');
-		
 		int posicion_x = convertir_entero( linea[linea.obtener_tamano()-2]);
 		int posicion_y = convertir_entero( linea[linea.obtener_tamano()-1]);
+		
 		Coordenada coordenada(posicion_x,posicion_y);
 
-		string cazador = linea[1].find(CAZADOR)==string::npos ? CAZADOR : "";
+		string cazador = linea[1].find(CAZADOR)==string::npos ? "" : " "+CAZADOR;
+
 		string nombre = linea[0]+cazador;
 		
 		int indice = buscar_dato(ELEMENTOS,MAX_OBJETOS,nombre);
+
 		switch(indice)
 		{
 			case AGUA: 			objetos.agregar(new Agua(coordenada,NOMBRES[indice],convertir_entero(linea[1]))); break;
@@ -96,6 +100,8 @@ void Datos::cargar_objetos(Lista<string> datos){
 			case NOSFERATU: 	objetos.agregar(new Nosferatu(coordenada,NOMBRES[indice])); break;
 
 			case ZOMBIE: 		objetos.agregar(new Zombie(coordenada,NOMBRES[indice])); break;	
+
+			default: 			cout<<"No se ha encontrado el objeto de nombre "<<nombre<<endl; break;
 		}
 	}
 }
