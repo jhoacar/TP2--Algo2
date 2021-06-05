@@ -17,12 +17,12 @@ class Datos
 	void cargar_objetos(Lista<string> datos);
 	void cargar_tablero();
 	
-	Objeto* crear_objeto(const int opcion,string nombre,Coordenada posicion,const int cantidad);
+	Objeto* crear_objeto(const int opcion,const char nombre,Coordenada posicion,const int cantidad);
 	bool es_elemento(Objeto *objeto);
 
-	Coordenada convertir_posicion(Lista<string> datos);
-	string convertir_nombre(Lista<string> datos);
-	int convertir_cantidad(Lista<string> datos);
+	Coordenada convertir_posicion(Lista<string> &datos);
+	string convertir_nombre(Lista<string> &datos);
+	int convertir_cantidad(Lista<string> &datos);
 
 	public:
 		Datos(const string nombre_archivo);

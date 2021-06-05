@@ -7,7 +7,7 @@ class Elemento : public Objeto
 {
 	public:
 		Elemento();
-		Elemento(Coordenada posicion,string nombre,int cantidad);
+		Elemento(Coordenada posicion,char nombre,int cantidad);
 		void mostrar();
 		int obtener_cantidad();
 		~Elemento();

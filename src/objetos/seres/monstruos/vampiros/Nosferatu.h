@@ -7,7 +7,7 @@ class Nosferatu : public Vampiro
 {
 	public:
 		Nosferatu();
-		Nosferatu(Coordenada posicion,std::string nombre);
+		Nosferatu(Coordenada posicion,char nombre);
 		~Nosferatu();
 	protected:
 };

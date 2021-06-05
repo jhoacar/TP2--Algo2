@@ -41,11 +41,24 @@ bool Tablero::posicion_valida(Coordenada posicion){
     Coordenada limite(filas,columnas);
     return posicion<limite;
 }
-void Tablero::cargar(Objeto *objeto){
+void Tablero::cargar_objeto(Objeto *objeto){
     Coordenada posicion = objeto->obtener_posicion();
     if(posicion_valida(posicion))
         objetos[posicion.obtener_x()][posicion.obtener_y()]=objeto;
 }
 bool Tablero::existe_objeto(Coordenada posicion){
     return posicion_valida(posicion) && objetos[posicion.obtener_x()][posicion.obtener_y()]!=nullptr;
+}
+int Tablero::obtener_filas(){
+    return this->filas;
+}
+int Tablero::obtener_columnas(){
+    return this->columnas;
+}
+
+Objeto *Tablero::obtener_objeto(Coordenada posicion){
+    Objeto *objeto = nullptr; 
+    if(posicion_valida(posicion))
+        objeto = objetos[posicion.obtener_x()][posicion.obtener_y()];
+    return objeto;
 }

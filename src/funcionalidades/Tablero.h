@@ -13,7 +13,10 @@ class Tablero
 		Tablero(int filas,int columnas);
 		bool posicion_valida(Coordenada posicion);
 		bool existe_objeto(Coordenada posicion);
-		void cargar(Objeto *objeto);
+		int obtener_filas();
+		int obtener_columnas();
+		Objeto *obtener_objeto(Coordenada posicion);
+		void cargar_objeto(Objeto *objeto);
 		~Tablero();
 	protected:
 };

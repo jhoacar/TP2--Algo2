@@ -3,7 +3,7 @@
 Cruz::Cruz():Elemento(){
 
 }
-Cruz::Cruz(Coordenada posicion,string nombre,int cantidad):Elemento(posicion,nombre,cantidad)
+Cruz::Cruz(Coordenada posicion,char nombre,int cantidad):Elemento(posicion,nombre,cantidad)
 {
 }
 

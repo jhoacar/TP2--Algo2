@@ -21,7 +21,6 @@ class Lista
 		void operator=(const Lista);
 	protected:
 };
-
 template <class Dato>
 Lista<Dato>::Lista()
 {
@@ -94,6 +93,7 @@ void Lista<Dato>::operator=(const Lista<Dato> lista){
 	this->fin 		= lista.fin;
 	this->tamano	= lista.tamano;
 }
+
 
 
 #endif

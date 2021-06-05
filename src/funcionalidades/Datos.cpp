@@ -24,7 +24,7 @@ using std::endl;
 const size_t MAX_OBJETOS = 12;
 const string CAZADOR = "CV";
 const string ELEMENTOS[MAX_OBJETOS]=	{"agua","bala","cruz","estaca","escopeta","humano","humano CV","Vanesa","vampiro","Vampirella","Nosferatu","zombi"};
-const string NOMBRES[MAX_OBJETOS]=	{"a",	"b",	"c",	"e",	"E",		"h",		"H",	"W",		"v",		"V",		"N",	"z"};
+const char NOMBRES[MAX_OBJETOS]=	{'a',	'b',	'c',	'e',	'E',		'h',		'H',	'W',		'v',		'V',		'N',	'z'};
 enum {AGUA=0,BALA,CRUZ,ESTACA,ESCOPETA,HUMANO,HUMANO_CAZADOR,VANESA,VAMPIRO,VAMPIRELLA,NOSFERATU,ZOMBIE};
 
 Datos::Datos(const string nombre_archivo)
@@ -47,14 +47,14 @@ Datos::~Datos()
 
 void Datos::cargar_tablero(){
 	for(size_t i=0;i<objetos.obtener_tamano();i++)
-		this->tablero->cargar(objetos[i]);
+		this->tablero->cargar_objeto(objetos[i]);
 }
 void Datos::crear_tablero(string dimensiones){
 	Lista<string> datos = dividir_texto(dimensiones,' ');
 	this->tablero =new Tablero(convertir_entero(datos[0]),convertir_entero(datos[1]));
 }
 
-Objeto* Datos::crear_objeto(const int opcion,string nombre,Coordenada posicion, int cantidad){
+Objeto* Datos::crear_objeto(const int opcion,const char nombre,Coordenada posicion, int cantidad){
 	Objeto *objeto;
 	switch(opcion)
 	{
@@ -87,18 +87,18 @@ Objeto* Datos::crear_objeto(const int opcion,string nombre,Coordenada posicion, 
 	return objeto;
 }
 
-Coordenada Datos::convertir_posicion(Lista<string> datos){
+Coordenada Datos::convertir_posicion(Lista<string> &datos){
 	int posicion_x = convertir_entero( datos[datos.obtener_tamano()-2]);
 	int posicion_y = convertir_entero( datos[datos.obtener_tamano()-1]);
 	Coordenada coordenada(posicion_x,posicion_y);
 	return coordenada;
 }
-string Datos::convertir_nombre(Lista<string> datos){
+string Datos::convertir_nombre(Lista<string> &datos){
 	string es_cazador = datos[1].find(CAZADOR)==string::npos ? "" : " "+CAZADOR;
 	string nombre = datos[0] + es_cazador;
 	return nombre;
 }
-int Datos::convertir_cantidad(Lista<string> datos){
+int Datos::convertir_cantidad(Lista<string> &datos){
 	int cantidad=1;
 	if(datos[1].find("(")==string::npos)
 		cantidad = convertir_entero(datos[1]);
@@ -115,7 +115,7 @@ void Datos::cargar_objetos(Lista<string> lineas){
 		int 			cantidad_objeto = convertir_cantidad(division_datos);
 		int indice = 	buscar_dato(ELEMENTOS,MAX_OBJETOS,nombre_objeto);
 		
-		Objeto *objeto = crear_objeto(indice,nombre_objeto,posicion_objeto,cantidad_objeto);
+		Objeto *objeto = crear_objeto(indice,NOMBRES[indice],posicion_objeto,cantidad_objeto);
 		this->objetos.agregar(objeto);
 	}
 }
@@ -142,9 +142,6 @@ int Datos::obtener_cantidad(const char *tipo_objeto){
 	}
 	return cantidad;
 }
-
-
-
 
 void Datos::mostrar_resumen(){
 	
@@ -179,4 +176,18 @@ void Datos::mostrar_resumen(){
     cout<<"ESCOPETAS\t"<<cantidad_escopetas<<"\t\t\t"<<(cantidad_balas!=0?100*(float)cantidad_escopetas/(float)cantidad_balas:0)<<endl;
     cout<<"BALAS\t\t"<<cantidad_balas<<"\t\t\t"<<(cantidad_escopetas!=0?100*(float)cantidad_balas/(float)cantidad_escopetas:0)<<endl;
 
+}
+
+void Datos::mostrar_tablero(){
+
+	for(int i=0;i<tablero->obtener_filas();i++){
+		for(int j=0;j<tablero->obtener_columnas();j++){
+			Objeto *objeto = tablero->obtener_objeto((Coordenada){i,j});
+			if(objeto!=nullptr)
+				cout<<" "<<objeto->obtener_nombre()<<" ";
+			else
+				cout<<" * ";
+		}
+		cout<<endl;
+	}
 }

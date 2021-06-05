@@ -7,7 +7,7 @@ class Monstruo : public Ser
 {
 	public:
 		Monstruo();
-		Monstruo(Coordenada posicion,std::string nombre);
+		Monstruo(Coordenada posicion,char nombre);
 		~Monstruo();
 	protected:
 };

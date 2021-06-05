@@ -5,7 +5,7 @@ Elemento::Elemento():Objeto(){
 
 }
 
-Elemento::Elemento(Coordenada posicion, string nombre ,int cantidad):Objeto(posicion,nombre){
+Elemento::Elemento(Coordenada posicion, char nombre ,int cantidad):Objeto(posicion,nombre){
 	this->cantidad=cantidad;
 }
 

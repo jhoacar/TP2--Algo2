@@ -6,17 +6,15 @@
 using std::string;
 
 class Objeto{
-    protected: 
-        string nombre;
+    protected:
+        char nombre;
         string cuadrante;
         Coordenada posicion;
     public:
-        Objeto():nombre(),cuadrante(),posicion(){
-            this->nombre="";
-            this->cuadrante="";
-            this->posicion={0,0};
+        Objeto():cuadrante(),posicion(){
+            this->nombre=0;
         }
-        Objeto(Coordenada posicion,string nombre):nombre(nombre),posicion(posicion){
+        Objeto(Coordenada posicion,char nombre):nombre(nombre),posicion(posicion){
             this->cuadrante="";        
         }
         ~Objeto(){
@@ -28,6 +26,9 @@ class Objeto{
         }
         string obtener_cuadrante(){
             return this->cuadrante;
+        }
+        char obtener_nombre(){
+            return this->nombre;
         }
 };
 

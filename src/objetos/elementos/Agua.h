@@ -7,7 +7,7 @@ class Agua : public Elemento
 {
 	public:
 		Agua();
-		Agua(Coordenada posicion,string nombre,int cantidad);
+		Agua(Coordenada posicion,char nombre,int cantidad);
 		~Agua();
 	protected:
 };

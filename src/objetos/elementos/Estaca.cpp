@@ -3,7 +3,7 @@
 Estaca::Estaca():Elemento(){
     
 }
-Estaca::Estaca(Coordenada posicion,string nombre,int cantidad):Elemento(posicion,nombre,cantidad)
+Estaca::Estaca(Coordenada posicion,char nombre,int cantidad):Elemento(posicion,nombre,cantidad)
 {
 }
 

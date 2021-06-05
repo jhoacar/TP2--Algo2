@@ -3,7 +3,7 @@
 Vampiro::Vampiro():Monstruo(){
     
 }
-Vampiro::Vampiro(Coordenada posicion,std::string nombre):Monstruo(posicion,nombre)
+Vampiro::Vampiro(Coordenada posicion,char nombre):Monstruo(posicion,nombre)
 {
 }
 

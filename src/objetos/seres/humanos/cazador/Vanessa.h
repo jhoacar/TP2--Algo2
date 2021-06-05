@@ -7,7 +7,7 @@ class Vanessa : public Cazador
 {
 	public:
 		Vanessa();
-		Vanessa(Coordenada posicion,std::string nombre);
+		Vanessa(Coordenada posicion,char nombre);
 		~Vanessa();
 	protected:
 };
