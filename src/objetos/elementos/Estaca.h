@@ -7,6 +7,7 @@ class Estaca : public Elemento{
 	public:
 		Estaca();
 		Estaca(Coordenada posicion,char nombre,int cantidad);
+		void mostrar();
 		~Estaca();
 	protected:
 };

@@ -9,6 +9,7 @@ class Monstruo : public Ser
 		Monstruo();
 		Monstruo(Coordenada posicion,char nombre);
 		~Monstruo();
+		void mostrar();
 	protected:
 };
 

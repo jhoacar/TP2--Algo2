@@ -28,7 +28,7 @@ class Datos
 		Datos(const string nombre_archivo);
 		~Datos();
 		void mostrar_resumen();
-		void mostrar_tablero();
+		Tablero* obtener_tablero();
 		int obtener_cantidad(const char *objeto);
 	protected:
 };

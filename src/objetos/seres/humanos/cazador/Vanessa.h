@@ -8,6 +8,7 @@ class Vanessa : public Cazador
 	public:
 		Vanessa();
 		Vanessa(Coordenada posicion,char nombre);
+		void mostrar();
 		~Vanessa();
 	protected:
 };

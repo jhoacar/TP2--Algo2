@@ -8,6 +8,7 @@ class Cruz : public Elemento
 	public:
 		Cruz();
 		Cruz(Coordenada posicion,char nombre,int cantidad);
+		void mostrar();
 		~Cruz();
 	protected:
 };

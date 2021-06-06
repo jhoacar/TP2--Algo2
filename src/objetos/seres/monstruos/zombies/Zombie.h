@@ -8,6 +8,7 @@ class Zombie : public Monstruo
 	public:
 		Zombie();
 		Zombie(Coordenada posicion,char nombre);
+		void mostrar();
 		~Zombie();
 	protected:
 };

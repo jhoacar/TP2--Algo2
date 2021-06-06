@@ -30,6 +30,9 @@ class Objeto{
         char obtener_nombre(){
             return this->nombre;
         }
+        void asignar_cuadrante(string cuadrante){
+            this->cuadrante=cuadrante;
+        }
 };
 
 #endif

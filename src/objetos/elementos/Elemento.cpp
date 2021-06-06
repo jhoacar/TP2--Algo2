@@ -13,10 +13,6 @@ Elemento::~Elemento()
 {
 
 }
-
-void Elemento::mostrar(){	
-	std::cout<<"Nombre: "<<this->nombre<<" Cantidad: "<<this->cantidad<<std::endl;
-}
 int Elemento::obtener_cantidad(){
 	return this->cantidad;
 }

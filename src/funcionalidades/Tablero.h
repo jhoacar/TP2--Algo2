@@ -16,7 +16,9 @@ class Tablero
 		int obtener_filas();
 		int obtener_columnas();
 		Objeto *obtener_objeto(Coordenada posicion);
+		string obtener_cuadrante(Coordenada posicion);
 		void cargar_objeto(Objeto *objeto);
+		void mostrar_tablero();
 		~Tablero();
 	protected:
 };

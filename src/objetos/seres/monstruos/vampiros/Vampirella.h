@@ -8,6 +8,7 @@ class Vampirella : public Vampiro
 	public:
 		Vampirella();
 		Vampirella(Coordenada posicion,char nombre);
+		void mostrar();
 		~Vampirella();
 	protected:
 };

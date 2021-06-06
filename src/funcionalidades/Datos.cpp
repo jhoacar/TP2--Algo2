@@ -178,16 +178,6 @@ void Datos::mostrar_resumen(){
 
 }
 
-void Datos::mostrar_tablero(){
-
-	for(int i=0;i<tablero->obtener_filas();i++){
-		for(int j=0;j<tablero->obtener_columnas();j++){
-			Objeto *objeto = tablero->obtener_objeto((Coordenada){i,j});
-			if(objeto!=nullptr)
-				cout<<" "<<objeto->obtener_nombre()<<" ";
-			else
-				cout<<" * ";
-		}
-		cout<<endl;
-	}
+Tablero* Datos::obtener_tablero(){
+	return this->tablero;
 }

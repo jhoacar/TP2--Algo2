@@ -8,7 +8,6 @@ class Ser : public Objeto
 	public:
 		Ser();
 		Ser(Coordenada posicion,char nombre);
-		void mostrar();
 		~Ser();
 };
 

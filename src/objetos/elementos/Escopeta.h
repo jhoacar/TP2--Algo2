@@ -8,6 +8,7 @@ class Escopeta : public Elemento
 	public:
 		Escopeta();
 		Escopeta(Coordenada posicion,char nombre,int cantidad);
+		void mostrar();
 		~Escopeta();
 	protected:
 };

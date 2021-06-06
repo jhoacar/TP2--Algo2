@@ -48,7 +48,8 @@ void Menu::menu_tablero(){
     else
         menu="\t\t\tTABLERO";
     cout<<menu;
-    datos->mostrar_tablero();
+    Tablero *tablero = datos->obtener_tablero();
+    if(tablero!=nullptr) tablero->mostrar_tablero();
     cin.ignore();
     cin.get();
 
@@ -80,7 +81,15 @@ void Menu::menu_letra_incorrecta(){
 }
 
 void Menu::menu_buscar_elemento(){
-
+    limpiar_pantalla();
+    string menu=obtener_texto("src\\interfaz\\buscar_elemento.txt");
+    if(menu.length()>0)
+        menu.replace(menu.find("\\"),1,"\\\\");
+    else
+        menu="Ingrese una letra correcta";
+    cout<<menu;
+    
+    
 }
 void Menu::menu_agregar_elemento(){
 

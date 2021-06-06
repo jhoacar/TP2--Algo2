@@ -8,6 +8,7 @@ class Humano : public Ser
 	public:
 		Humano();
 		Humano(Coordenada posicion,char nombre);
+		void mostrar();
 		~Humano();
 	protected:
 };
