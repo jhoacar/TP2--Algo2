@@ -6,6 +6,8 @@ using std::string;
 
 #include "Lista.h"
 
+const int NO_ENCONTRADO = -1;
+
 int minimo(int numero_a, int numero_b);
 bool es_minuscula(char letra);
 char caracter_mayuscula(char caracter);
@@ -27,6 +29,6 @@ int buscar_dato(const Dato vector[],const size_t tope,Dato dato){
 		else
 			indice++;
 	}
-	return encontrado? indice : -1;
+	return encontrado? indice : NO_ENCONTRADO;
 }
 #endif

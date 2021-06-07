@@ -7,8 +7,8 @@ CPP     	:= g++
 #Compilador del proyecto
 VALGRIND	:= valgrind --leak -check=full --track -origins=yes --show -reachable=yes
 #Depurador
-FLAGS 		:= -ggdb -std=c++11
-#Banderas adicionales: -Wall -Wconversion -limits -Werror -O0 (Produce [-Werror=delete-non-virtual-dtor] al querer realizar  delete objetos[i][j] que es una clase abstracta)
+FLAGS 		:= -ggdb -std=c++11 -Wconversion -limits -O0
+#Banderas adicionales: -Wall -Werror (Produce [-Werror=delete-non-virtual-dtor] al querer realizar  delete objetos[i][j] que es una clase abstracta)
 #Banderas de compilacion que muestran en detalle cada error
 MKDIR 		:= mkdir -p
 #Instruccion para crear carpetas y subcarpetas con el uso de -p

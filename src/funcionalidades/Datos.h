@@ -8,6 +8,17 @@
 using std::string;
 using std::type_info;
 
+const size_t MAX_OBJETOS = 12;
+
+const string CAZADOR = "CV";
+
+const string ELEMENTOS[MAX_OBJETOS]=	{"agua","bala","cruz","estaca","escopeta","humano","humano CV","Vanesa","vampiro","Vampirella","Nosferatu","zombi"};
+
+const char NOMBRES[MAX_OBJETOS]=	{'a',	'b',	'c',	'e',	'E',		'h',		'H',	'W',		'v',		'V',		'N',	'z'};
+
+enum {AGUA=0,BALA,CRUZ,ESTACA,ESCOPETA,HUMANO,HUMANO_CAZADOR,VANESA,VAMPIRO,VAMPIRELLA,NOSFERATU,ZOMBIE};
+
+
 class Datos
 {
 	Lista<Objeto *> objetos;
