@@ -7,6 +7,7 @@ class Nodo{
     Dato dato;
     Nodo<Dato> *siguiente;
     public:
+        //Usado para poder acceder a estos miembros desde la clase lista
         template <class> friend class Lista;
         Nodo(){
             siguiente=nullptr;

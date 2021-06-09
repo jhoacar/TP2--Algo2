@@ -10,15 +10,44 @@ class Lista
 	Nodo<Dato> *fin;
 	unsigned int tamano;
 	public:
+		/*
+		PRE: Un tamano de la lista a cargar
+		POST: Crea una lista con un tamano especificado
+		*/
 		Lista(const unsigned int tamano);
 		Lista();
 		~Lista();
+		/*
+		PRE: Un dato a cargar en la lista
+		POST: Almacena en la ultima posicion el dato
+		*/
 		void agregar(Dato dato);
+		/*
+		PRE: 
+		POST: Obtiene el tamaño de la lista
+		*/
 		unsigned int obtener_tamano();
+		/*
+		PRE: Un indice a buscar
+		POST: Retorna verdadero si es un indice perteneciente a la lista, falso caso contrario
+		*/
 		bool es_valido(const unsigned int indice);
+		/*
+		PRE: Un indice a buscar
+		POST: Retorna el nodo encontrado en dicho indice
+		*/
 		Nodo<Dato>* buscar_nodo(const unsigned int indice);
+		/*
+		PRE: Un indice a buscar el nodo
+		POST: Retorna el dato encontrado en dicho indice
+		*/
 		Dato operator[](const unsigned int indice);
+		/*
+		PRE: Una Lista a asignar
+		POST: Carga toda la informacion de la lista del parametro
+		*/
 		void operator=(const Lista);
+		
 	protected:
 };
 
@@ -68,8 +97,6 @@ Lista<Dato>::~Lista()
 	inicio=nullptr;
 
 	fin=nullptr;
-
-	tamano=0;
 }
 
 template <class Dato>
@@ -94,7 +121,7 @@ unsigned int Lista<Dato>::obtener_tamano(){
 template <class Dato>
 bool Lista<Dato>::es_valido(const unsigned int indice){
 
-	return indice>=0&&indice<=tamano;
+	return indice >= 0 && indice <= tamano;
 
 }
 
@@ -143,6 +170,8 @@ Dato Lista<Dato>::operator[](const unsigned int indice){
 template <class Dato>
 void Lista<Dato>::operator=(const Lista<Dato> lista){
 
+	delete inicio;
+	
 	this->inicio 	= lista.inicio;
 
 	this->fin 		= lista.fin;

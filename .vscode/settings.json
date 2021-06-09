@@ -6,6 +6,7 @@
         "string": "cpp",
         "fstream": "cpp",
         "new": "cpp",
-        "*.tcc": "cpp"
+        "*.tcc": "cpp",
+        "limits": "cpp"
     }
 }

@@ -14,7 +14,7 @@ Coordenada::~Coordenada(){
 	
 }
 
-Coordenada Coordenada::operator =(Coordenada coordenada){
+Coordenada& Coordenada::operator =(Coordenada coordenada){
 	this->x=coordenada.x;
 	this->y=coordenada.y;
 	return *this;
@@ -23,14 +23,21 @@ Coordenada Coordenada::operator =(Coordenada coordenada){
 bool Coordenada::operator ==(Coordenada coordenada){
 	return this->x==coordenada.x && this->y==coordenada.y;
 }
+bool Coordenada::operator !=(Coordenada coordenada){
+	return this->x!=coordenada.x || this->y!=coordenada.y;
+}
 bool Coordenada::operator<(Coordenada limite){
-	return this->x > 0 && this->x < limite.x &&
-		   this->y > 0 && this->y < limite.y;
+	return this->x >= 0 && this->x < limite.x &&
+		   this->y >= 0 && this->y < limite.y;
+}
+void Coordenada::operator-=(const int decremento){
+	this->x = this->x-decremento;
+	this->y = this->y-decremento;
 }
 int Coordenada::obtener_x(){
-	return x;
+	return this->x;
 }
 
 int Coordenada::obtener_y(){
-	return y;
+	return this->y;
 }

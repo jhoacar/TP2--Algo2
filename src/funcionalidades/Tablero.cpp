@@ -1,5 +1,6 @@
 #include "Tablero.h"
 #include <iostream>
+#include "Funciones.h"
 
 using namespace std;
 
@@ -69,18 +70,18 @@ string Tablero::obtener_cuadrante(Coordenada posicion){
     if(!posicion_valida(posicion))
     
         return "";
-    
+
     else if(posicion.obtener_x()<columnas/2 && posicion.obtener_y()<filas/2)
-    
-        return CARDINALES[NE];
-    
-    else if(posicion.obtener_x()>columnas/2 && posicion.obtener_y()<filas/2)
     
         return CARDINALES[NO];
     
-    else if(posicion.obtener_x()<columnas/2 && posicion.obtener_y()>filas/2)
+    else if(posicion.obtener_x()>columnas/2 && posicion.obtener_y()>filas/2)
     
         return CARDINALES[SE];
+    
+    else if(posicion.obtener_x()>=columnas/2 && posicion.obtener_y()<=filas/2)
+    
+        return CARDINALES[NE];
     
     else
     
@@ -89,31 +90,30 @@ string Tablero::obtener_cuadrante(Coordenada posicion){
 
 bool Tablero::posicion_valida(Coordenada posicion){
 
-    Coordenada limite( filas , columnas );
+    Coordenada limite( columnas , filas );
 
     return posicion<limite;
 
 }
 void Tablero::cargar_objeto(Objeto *objeto){
+    
+    if(objeto!=nullptr){
 
-    Coordenada posicion = objeto->obtener_posicion();
+        Coordenada posicion = objeto->obtener_posicion();
+
+        posicion-=1;
+
+        if(posicion_valida(posicion)){
+
+            objeto->asignar_cuadrante( obtener_cuadrante ( posicion ) );
     
-    if(posicion_valida(posicion)){
+            objetos[ posicion.obtener_y() ][ posicion.obtener_x() ] = objeto;
     
-        objeto->asignar_cuadrante( obtener_cuadrante ( objeto->obtener_posicion() ) );
-    
-        objetos[ posicion.obtener_x() ][ posicion.obtener_y() ] = objeto;
-    
+        }
+
     }    
 }
 
-bool Tablero::existe_objeto(Coordenada posicion){
-
-    return  posicion_valida(posicion) && 
-
-            objetos[ posicion.obtener_x() ][ posicion.obtener_y() ] != nullptr;
-
-}
 int Tablero::obtener_filas(){
     
     return this->filas;
@@ -125,41 +125,20 @@ int Tablero::obtener_columnas(){
 
 }
 
-Objeto* Tablero::obtener_objeto(string cuadrante,char nombre){
+bool Tablero::eliminar_objeto(Coordenada posicion){
 
-    bool encontrado=false;
-    int i=0;
-    int j=0;
-
-    while(i<filas && !encontrado){
-
-        j=0;
-        while(j<columnas && !encontrado){
+    if(posicion_valida(posicion)){
+        
+        if(objetos[posicion.obtener_x()][posicion.obtener_y()]!=nullptr){
             
-            if(objetos[i][j]!=nullptr){
-
-                encontrado= objetos[i][j]->obtener_cuadrante()== cuadrante &&
-                            objetos[i][j]->obtener_nombre()   == nombre;
-            }
-            if(!encontrado)
-                j++;
+            delete objetos[posicion.obtener_x()][posicion.obtener_y()];
+            
+            objetos[posicion.obtener_x()][posicion.obtener_y()]=nullptr;
+            
+            return true;
         }
-        if(!encontrado)
-            i++;
     }
-
-    return objetos[i][j];
-}
-
-Objeto *Tablero::obtener_objeto(Coordenada posicion){
-   
-    Objeto *objeto = nullptr; 
-
-    if(posicion_valida(posicion))
-    
-        objeto = objetos[posicion.obtener_x()][posicion.obtener_y()];
-    
-    return objeto;
+    return false;
 }
 
 void Tablero::mostrar_tablero(){
