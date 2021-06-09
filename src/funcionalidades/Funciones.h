@@ -35,7 +35,7 @@ string obtener_texto(const string nombre_fichero);
 PRE: Un texto y un delimitador del texto
 POST: Una lista de string donde cada dato es el separado por el delimitador
 */
-Lista<string>* dividir_texto(const string texto,const char delim);
+Lista<string> dividir_texto(const string texto,const char delim);
 /*
 PRE: Una cadena a evaluar
 POST: Devuelve un string con solo numeros

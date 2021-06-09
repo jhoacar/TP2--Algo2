@@ -5,6 +5,7 @@
 using namespace std;
 
 #include "Nodo.h"
+#include <typeinfo>
 
 template <class Dato>
 class Lista
@@ -60,14 +61,36 @@ Lista<Dato>::Lista()
 
 }
 
+
 template <class Dato>
 Lista<Dato>::~Lista()
 {
 	cout<<"Eliminando lista"<<endl;
 
-	if(inicio != nullptr)
+	if(inicio != nullptr){
 
-		delete inicio;	
+		//Nodo<Dato> *aux;
+		//aux = inicio->siguiente;
+		//size_t i=0; 
+		//while( aux!=nullptr ){
+			
+		//	cout<<"Eliminando el "<<i++<<"elemento de la lista"<<endl;
+
+			//if(typeid(Dato) == typeid(Objeto*))
+			//{
+		//		delete aux->dato;
+				//cout<<aux->dato;
+				//((Objeto*)aux->dato)->mostrar();
+				//system("pause");
+			//}
+			
+			//aux = aux->siguiente;
+		//}
+
+		delete inicio;
+
+	}
+	
 
 	inicio=nullptr;
 
@@ -79,7 +102,7 @@ Lista<Dato>::~Lista()
 template <class Dato>
 void Lista<Dato>::agregar(Dato dato){
 
-	fin->dato=dato;
+	(*fin->dato)=dato;
 
 	fin->siguiente = new Nodo<Dato>();
 
@@ -137,7 +160,7 @@ Dato Lista<Dato>::operator[](const size_t indice){
 
 	if(nodo!=nullptr)
 
-		return nodo->dato;
+		return *(nodo->dato);
 
 	return	nullptr;
 }

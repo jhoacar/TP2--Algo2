@@ -20,7 +20,6 @@ Menu::Menu(string nombre)
 Menu::~Menu()
 {
     delete datos;
-    datos=nullptr;
 }
 
 

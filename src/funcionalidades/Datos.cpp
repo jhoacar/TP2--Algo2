@@ -30,20 +30,16 @@ Datos::Datos(const string nombre_archivo)
 		std::cout<<"No se pudieron extraer los datos del archivo "<<nombre_archivo<<endl;
 	
 	else{
-
-		objetos = new Lista<Objeto *>();
 	
-		Lista<string> *datos = dividir_texto(texto,'\n');
+		Lista<string> datos = dividir_texto(texto,'\n');
 	
-		crear_tablero((*datos)[0]);
+		crear_tablero(datos[0]);
 	
-		cargar_objetos(*datos);
+		cargar_objetos(datos);
 	
 		cargar_tablero();
 
 		cout<<"Se cargo todo correctamente"<<endl;
-
-		delete datos;
 	
 	}
 }
@@ -53,42 +49,27 @@ Datos::~Datos()
 	cout<<"Eliminando tablero"<<endl;
 	delete tablero;
 	cout<<"Tablero eliminado"<<endl;
-
-	cout<<"Eliminando vector objetos"<<endl;
-	for(int i=0 ; i < objetos->obtener_tamano() ; i++){
-		
-		if((*objetos)[i] != nullptr){
-			cout<<"Eliminando el objeto "<<i<<endl;
-			cout<<(*objetos)[i]<<endl;
-			delete (*objetos)[i];
-		}
-	}
-	delete objetos;
-	objetos = nullptr;
-	cout<<"Vector de objetos eliminado"<<endl;
 }
 
 void Datos::cargar_tablero(){
 
-	for(size_t i=0	; i < objetos->obtener_tamano()	;	i++)
+	for(size_t i=0	; i < objetos.obtener_tamano()	;	i++)
 	
-		this->tablero->cargar_objeto((*objetos)[i]);
+		this->tablero->cargar_objeto(objetos[i]);
 }
 
 void Datos::crear_tablero(const string &dimensiones){
 	
-	Lista<string> *datos = dividir_texto(dimensiones,' ');
+	Lista<string> datos = dividir_texto(dimensiones,' ');
 
-	int numero_filas 	= convertir_entero((*datos)[0]);
-	int numero_columnas = convertir_entero((*datos)[1]);
+	int numero_filas 	= convertir_entero(datos[0]);
+	int numero_columnas = convertir_entero(datos[1]);
 	
 	if(numero_filas<0	||	numero_columnas<0)
 		numero_filas = numero_columnas = 0;
 	
 
 	this->tablero = new Tablero(	numero_filas ,	numero_columnas	);
-
-	delete datos;
 }
 
 Objeto* Datos::crear_objeto(const int tipo,const char nombre,Coordenada posicion, int cantidad){
@@ -128,17 +109,15 @@ Objeto* Datos::crear_objeto(const int tipo,const char nombre,Coordenada posicion
 
 Coordenada Datos::convertir_posicion(const string &linea){
 	
-	Lista<string> *datos = dividir_texto(linea,'(');
-	Lista<string> *posicion = dividir_texto((*datos)[1],',');
+	Lista<string> datos = dividir_texto(linea,'(');
+	Lista<string> posicion = dividir_texto(datos[1],',');
 	
-	int posicion_x = convertir_entero( (*posicion)[0] );
+	int posicion_x = convertir_entero( posicion[0] );
 	
-	int posicion_y = convertir_entero( (*posicion)[1] );
+	int posicion_y = convertir_entero( posicion[1] );
 	
 	Coordenada coordenada(	posicion_x	,	posicion_y	);
 
-	delete datos;
-	
 	return coordenada;
 }
 
@@ -166,21 +145,19 @@ void Datos::cargar_objetos(Lista<string> &lineas){
 	
 	for(size_t i=1;	i<lineas.obtener_tamano();	i++){
 
-		Lista<string> 	*division_datos = dividir_texto(lineas[i],' ');
+		Lista<string> 	division_datos = dividir_texto(lineas[i],' ');
 
 		Coordenada 		posicion_objeto = convertir_posicion(lineas[i]);
 
-		string 			nombre_objeto	= convertir_nombre(*division_datos);
+		string 			nombre_objeto	= convertir_nombre(division_datos);
 
-		int 			cantidad_objeto = convertir_cantidad(*division_datos);
+		int 			cantidad_objeto = convertir_cantidad(division_datos);
 
 		int tipo = 	buscar_dato(OBJETOS,MAX_OBJETOS,nombre_objeto);
 		
 		Objeto *objeto = crear_objeto(tipo	,	NOMBRES[tipo],	posicion_objeto,	cantidad_objeto);
 
-		this->objetos->agregar(objeto);
-
-		delete division_datos;
+		this->objetos.agregar(objeto);
 	}
 }
 
@@ -192,13 +169,13 @@ bool Datos::tiene_cantidad(Objeto *objeto){
 int Datos::obtener_cantidad(int tipo_objeto){
 	int cantidad=0;
 
-	for(size_t i=0;	i<objetos->obtener_tamano();	i++){
+	for(size_t i=0;	i<objetos.obtener_tamano();	i++){
 
-		if(	(*this->objetos)[i]->obtener_nombre()	==	NOMBRES[tipo_objeto]){
+		if(	this->objetos[i]->obtener_nombre()	==	NOMBRES[tipo_objeto]){
 
-			if(	tiene_cantidad((*objetos)[i])	){
+			if(	tiene_cantidad(objetos[i])	){
 
-				Elemento *elemento = (Elemento *)((*objetos)[i]);
+				Elemento *elemento = (Elemento *)(objetos[i]);
 
 				cantidad+=elemento->obtener_cantidad();
 
@@ -253,11 +230,11 @@ void Datos::mostrar_resumen(){
 
 void Datos::mostrar_datos(){
 
-	for( int i=0; i<objetos->obtener_tamano(); i++){
+	for( int i=0; i<objetos.obtener_tamano(); i++){
 
-		cout<<endl<<"Objeto: "<<OBJETOS[buscar_dato(NOMBRES,MAX_OBJETOS,(*objetos)[i]->obtener_nombre())]<<endl;
-		cout<<"Posicion: x = "<<(*objetos)[i]->obtener_posicion().obtener_x()<<" y = "<<(*objetos)[i]->obtener_posicion().obtener_y()<<endl;
-		cout<<"Cuadrante: "<<(*objetos)[i]->obtener_cuadrante()<<endl;
+		cout<<endl<<"Objeto: "<<OBJETOS[buscar_dato(NOMBRES,MAX_OBJETOS,objetos[i]->obtener_nombre())]<<endl;
+		cout<<"Posicion: x = "<<objetos[i]->obtener_posicion().obtener_x()<<" y = "<<objetos[i]->obtener_posicion().obtener_y()<<endl;
+		cout<<"Cuadrante: "<<objetos[i]->obtener_cuadrante()<<endl;
 	}
 }
 
@@ -273,15 +250,15 @@ Objeto* Datos::buscar_objeto(string cuadrante, char nombre){
 	
 	bool encontrado=false;
 
-	while(!encontrado && indice < objetos->obtener_tamano()){
+	while(!encontrado && indice < objetos.obtener_tamano()){
 
-		if((*objetos)[indice]->obtener_cuadrante() == cuadrante && (*objetos)[indice]->obtener_nombre() == nombre)
+		if(objetos[indice]->obtener_cuadrante() == cuadrante && objetos[indice]->obtener_nombre() == nombre)
 			encontrado = true;
 		else
 			indice++;
 	}
 
-	return encontrado ? (*objetos)[indice] : nullptr;
+	return encontrado ? objetos[indice] : nullptr;
 }
 
 Objeto* Datos::buscar_objeto(Coordenada posicion){
@@ -290,14 +267,14 @@ Objeto* Datos::buscar_objeto(Coordenada posicion){
 	
 	bool encontrado=false;
 
-	while(!encontrado && indice < objetos->obtener_tamano()){
+	while(!encontrado && indice < objetos.obtener_tamano()){
 
-		if((*objetos)[indice]->obtener_posicion() == posicion)
+		if(objetos[indice]->obtener_posicion() == posicion)
 			encontrado = true;
 		else
 			indice++;
 	}
 
-	return encontrado ? (*objetos)[indice] : nullptr;
+	return encontrado ? objetos[indice] : nullptr;
 
 }

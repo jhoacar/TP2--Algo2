@@ -91,17 +91,17 @@ string obtener_texto(const string nombre_fichero){
   	return datos_texto;
 }
 
-Lista<string>* dividir_texto(const string texto,const char delim){
+Lista<string> dividir_texto(const string texto,const char delim){
 
 	stringstream buffer_texto(texto);
 
 	string cadena;
 	
-	Lista<string> *informacion = new Lista<string>();
+	Lista<string> informacion;
 	
 	while(getline(buffer_texto,cadena,delim))
 	
-		informacion->agregar(cadena);
+		informacion.agregar(cadena);
 	
 	return informacion;
 }
