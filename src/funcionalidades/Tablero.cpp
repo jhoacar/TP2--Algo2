@@ -129,11 +129,11 @@ bool Tablero::eliminar_objeto(Coordenada posicion){
 
     if(posicion_valida(posicion)){
         
-        if(objetos[posicion.obtener_x()][posicion.obtener_y()]!=nullptr){
+        if(objetos[posicion.obtener_y()][posicion.obtener_x()]!=nullptr){
             
-            delete objetos[posicion.obtener_x()][posicion.obtener_y()];
+            delete objetos[posicion.obtener_y()][posicion.obtener_x()];
             
-            objetos[posicion.obtener_x()][posicion.obtener_y()]=nullptr;
+            objetos[posicion.obtener_y()][posicion.obtener_x()]=nullptr;
             
             return true;
         }

@@ -106,11 +106,14 @@ Objeto* Datos::crear_objeto(const int tipo,const char nombre,Coordenada posicion
 	return objeto;
 }
 
-Coordenada Datos::convertir_posicion(Lista<string> &datos){
+Coordenada Datos::convertir_posicion(const string &linea){
 	
-	int posicion_x = convertir_entero( datos[	datos.obtener_tamano()-2]	);
+	Lista<string> datos = dividir_texto(linea,'(');
+	Lista<string> posicion = dividir_texto(datos[1],',');
 	
-	int posicion_y = convertir_entero( datos[	datos.obtener_tamano()-1]	);
+	int posicion_x = convertir_entero( posicion[0] );
+	
+	int posicion_y = convertir_entero( posicion[1] );
 	
 	Coordenada coordenada(	posicion_x	,	posicion_y	);
 	
@@ -143,7 +146,7 @@ void Datos::cargar_objetos(Lista<string> lineas){
 
 		Lista<string> 	division_datos 	= dividir_texto(lineas[i],' ');
 
-		Coordenada 		posicion_objeto = convertir_posicion(division_datos);
+		Coordenada 		posicion_objeto = convertir_posicion(lineas[i]);
 
 		string 			nombre_objeto	= convertir_nombre(division_datos);
 

@@ -25,7 +25,7 @@ Menu::~Menu()
 
 void Menu::mostrar_menu(){
 
-    string respuesta=0;
+    string respuesta=" ";
     
     while(respuesta[0]!=opciones[SALIR]){
         
@@ -39,6 +39,7 @@ void Menu::mostrar_menu(){
     
         }
         getline(cin,respuesta,'\n');
+        respuesta = cadena_mayuscula(respuesta);
 
         if      (respuesta[0] == opciones[RESUMEN])    menu_resumen();
         else if (respuesta[0] == opciones[TABLERO])    menu_tablero();

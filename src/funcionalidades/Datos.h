@@ -47,7 +47,7 @@ class Datos
 	PRE: Una lista de string con la informacion de la linea del fichero
 	POST: Decodifica la informacion y devuelve la posicion que encontro en la linea
 	*/
-	Coordenada 	convertir_posicion(	Lista<string> &datos);
+	Coordenada 	convertir_posicion(const string &linea);
 	/*
 	PRE: Una lista de string con la informacion de la linea del fichero
 	POST: Decodifica la informacion y devuelve el nombre que encontro en la linea
