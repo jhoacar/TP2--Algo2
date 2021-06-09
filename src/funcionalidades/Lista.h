@@ -1,6 +1,9 @@
 #ifndef LISTA_H
 #define LISTA_H
 
+#include <iostream>
+using namespace std;
+
 #include "Nodo.h"
 
 template <class Dato>
@@ -8,13 +11,8 @@ class Lista
 {
 	Nodo<Dato> *inicio;
 	Nodo<Dato> *fin;
-	unsigned int tamano;
+	size_t tamano;
 	public:
-		/*
-		PRE: Un tamano de la lista a cargar
-		POST: Crea una lista con un tamano especificado
-		*/
-		Lista(const unsigned int tamano);
 		Lista();
 		~Lista();
 		/*
@@ -26,22 +24,22 @@ class Lista
 		PRE: 
 		POST: Obtiene el tamaño de la lista
 		*/
-		unsigned int obtener_tamano();
+		size_t obtener_tamano();
 		/*
 		PRE: Un indice a buscar
 		POST: Retorna verdadero si es un indice perteneciente a la lista, falso caso contrario
 		*/
-		bool es_valido(const unsigned int indice);
+		bool es_valido(const size_t indice);
 		/*
 		PRE: Un indice a buscar
 		POST: Retorna el nodo encontrado en dicho indice
 		*/
-		Nodo<Dato>* buscar_nodo(const unsigned int indice);
+		Nodo<Dato>* buscar_nodo(const size_t indice);
 		/*
 		PRE: Un indice a buscar el nodo
 		POST: Retorna el dato encontrado en dicho indice
 		*/
-		Dato operator[](const unsigned int indice);
+		Dato operator[](const size_t indice);
 		/*
 		PRE: Una Lista a asignar
 		POST: Carga toda la informacion de la lista del parametro
@@ -63,40 +61,19 @@ Lista<Dato>::Lista()
 }
 
 template <class Dato>
-Lista<Dato>::Lista(const unsigned int tamano){
-
-	if(tamano > 0){
-
-		this->tamano=tamano;
-
-		this->inicio = new Nodo<Dato>();
-
-		fin=inicio;	
-
-		unsigned int i=0;
-
-		while(i < tamano){
-
-			fin->siguiente= new Nodo<Dato>();
-
-			fin=fin->siguiente;
-
-			i++;
-
-		}
-
-	}
-}
-
-template <class Dato>
 Lista<Dato>::~Lista()
 {
+	cout<<"Eliminando lista"<<endl;
 
-	delete inicio;	
+	if(inicio != nullptr)
+
+		delete inicio;	
 
 	inicio=nullptr;
 
 	fin=nullptr;
+
+	cout<<"Lista eliminada"<<endl;
 }
 
 template <class Dato>
@@ -112,21 +89,21 @@ void Lista<Dato>::agregar(Dato dato){
 }
 
 template <class Dato>
-unsigned int Lista<Dato>::obtener_tamano(){
+size_t Lista<Dato>::obtener_tamano(){
 
 	return tamano;
 
 }
 
 template <class Dato>
-bool Lista<Dato>::es_valido(const unsigned int indice){
+bool Lista<Dato>::es_valido(const size_t indice){
 
 	return indice >= 0 && indice <= tamano;
 
 }
 
 template <class Dato>
-Nodo<Dato>* Lista<Dato>::buscar_nodo(const unsigned int indice){
+Nodo<Dato>* Lista<Dato>::buscar_nodo(const size_t indice){
 
 	if(!es_valido(indice))
 
@@ -136,7 +113,7 @@ Nodo<Dato>* Lista<Dato>::buscar_nodo(const unsigned int indice){
 	
 	Nodo<Dato> *nodo;
 
-	unsigned int i=0;
+	size_t i=0;
 
 	nodo=aux;
 
@@ -154,23 +131,19 @@ Nodo<Dato>* Lista<Dato>::buscar_nodo(const unsigned int indice){
 }
 
 template <class Dato>
-Dato Lista<Dato>::operator[](const unsigned int indice){
+Dato Lista<Dato>::operator[](const size_t indice){
 	
 	Nodo<Dato> *nodo = buscar_nodo(indice);
 
 	if(nodo!=nullptr)
 
 		return nodo->dato;
-	
-	else
 
-		nullptr;
+	return	nullptr;
 }
 
 template <class Dato>
 void Lista<Dato>::operator=(const Lista<Dato> lista){
-
-	delete inicio;
 	
 	this->inicio 	= lista.inicio;
 

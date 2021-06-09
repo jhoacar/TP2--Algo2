@@ -20,19 +20,19 @@ enum {AGUA=0,BALA,CRUZ,ESTACA,ESCOPETA,HUMANO,HUMANO_CAZADOR,VANESA,VAMPIRO,VAMP
 
 class Datos
 {
-	Lista<Objeto *> objetos;
+	Lista<Objeto *> *objetos;
 	Tablero *tablero;
 
 	/*
 	PRE: Linea de texto con informacion de las dimensiones del tablero separadas por un espacio
 	POST: crea un tablero con las dimensiones extraidas
 	*/
-	void crear_tablero(string dimensiones);
+	void crear_tablero(const string &dimensiones);
 	/*
 	PRE: Una lista de strings donde cada posicion es el detalle de cada objeto a cargar
 	POST: guarda en la lista de punteros de objeto cada tipo de objeto encontrado en las cadena de string
 	*/
-	void cargar_objetos(Lista<string> datos);
+	void cargar_objetos( Lista<string> &datos);
 	/*
 	PRE:  
 	POST: Carga el tablero en la posicion que posea cada objeto de la lista de objetos

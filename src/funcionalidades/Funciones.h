@@ -35,7 +35,7 @@ string obtener_texto(const string nombre_fichero);
 PRE: Un texto y un delimitador del texto
 POST: Una lista de string donde cada dato es el separado por el delimitador
 */
-Lista<string> dividir_texto(const string texto,const char delim);
+Lista<string>* dividir_texto(const string texto,const char delim);
 /*
 PRE: Una cadena a evaluar
 POST: Devuelve un string con solo numeros
@@ -74,11 +74,11 @@ POST: Devuelve el indice donde se encontro el dato o NO_ENCONTRADO (-1) en caso 
 template <class Dato>
 int buscar_dato(const Dato vector[],const size_t tope,Dato dato){
 	
-	size_t indice = 0;
+	int indice = 0;
 	
 	bool encontrado=false;
 	
-	while(! encontrado && indice < tope ){
+	while(! encontrado && indice < (int)tope ){
 	
 		if(vector[indice]==dato)
 			encontrado=true;
