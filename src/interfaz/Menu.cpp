@@ -266,16 +266,10 @@ void Menu::menu_agregar_objeto(){
 
                 objeto = datos->crear_objeto(indice_nombre,nombre,posicion,cantidad);
 
-                bool es_agregado = datos->agregar_objeto(objeto);
+                datos->agregar_objeto(objeto);
                 
-                if(es_agregado){
-                    
-                    cout<<"Se agrego el objeto de Nombre: "<<OBJETOS[indice_nombre];
-                    cout<<" en la posicion: ( "<<posicion.obtener_x()<<" , "<<posicion.obtener_y()<<" )"<<endl;
-                    
-                }
-                else
-                    cout<<"Ocurrio un error al agregar el objeto"<<endl;
+                cout<<"Se agrego el objeto de Nombre: "<<OBJETOS[indice_nombre];
+                cout<<" en la posicion: ( "<<posicion.obtener_x()<<" , "<<posicion.obtener_y()<<" )"<<endl;
             }
 
             pausa();

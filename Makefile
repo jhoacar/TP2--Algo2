@@ -6,13 +6,14 @@ APP 		:= TP2
 CPP     	:= g++
 #Compilador del proyecto
 VALGRIND	:= valgrind --leak -check=full --track -origins=yes --show -reachable=yes
-#Depurador
+#Chequeo de memoria
 FLAGS 		:= -ggdb -std=c++11 -Wconversion -limits -O0
 #Con la opcion -ggdb para que se agreguen etiquetas de compilacion
 #-stdc=c++11 para compilar las librerias usadas para este proyecto
-#-Wconversion para consideras errores de conversion de tipo de datos
+#-Wconversion para considerar errores de conversion de tipo de datos
 #-O0 para desactivar optimizacion para la depuracion
-#Banderas adicionales: -Wall -Werror (Produce [-Werror=delete-non-virtual-dtor] al querer realizar  delete objetos[i][j] que es una clase abstracta)
+#Banderas adicionales: -Wall -Werror (Produce [-Werror=delete-non-virtual-dtor] 
+#al querer realizar  delete objetos[i][j] que es una clase abstracta)
 #Banderas de compilacion que muestran en detalle cada error
 MKDIR 		:= mkdir -p
 #Instruccion para crear carpetas y subcarpetas con el uso de -p
@@ -57,7 +58,7 @@ clean:
 	rm -f -r ./obj
 #Elimino cada archivo binario
 
-depuracion:
+valgrind:
 	$(VALGRIND) ./$(APP)
 
 #PHONY es Util para que no sea dependiente y ejecute solo con instruccion make info

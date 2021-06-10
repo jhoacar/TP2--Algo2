@@ -109,7 +109,7 @@ class Datos
 		PRE: Un objeto cargado a agregar
 		POST: Se agrega un objeto a la lista de objetos y al tablero
 		*/
-		bool agregar_objeto(Objeto *);
+		void agregar_objeto(Objeto *);
 		
 	protected:
 };

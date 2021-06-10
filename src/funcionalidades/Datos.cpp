@@ -227,7 +227,7 @@ void Datos::mostrar_resumen(){
 
 void Datos::mostrar_datos(){
 
-	for( int i=0; i<objetos.obtener_tamano(); i++){
+	for( size_t i=0; i<objetos.obtener_tamano(); i++){
 
 		cout<<endl<<"Objeto: "<<OBJETOS[buscar_dato(NOMBRES,MAX_OBJETOS,objetos[i]->obtener_nombre())]<<endl;
 		cout<<"Posicion: x = "<<objetos[i]->obtener_posicion().obtener_x()<<" y = "<<objetos[i]->obtener_posicion().obtener_y()<<endl;
@@ -276,9 +276,8 @@ Objeto* Datos::buscar_objeto(Coordenada posicion){
 
 }
 
-bool Datos::agregar_objeto(Objeto *objeto){
+void Datos::agregar_objeto(Objeto *objeto){
 
 	this->objetos.agregar(objeto);
 	this->tablero->cargar_objeto(objeto);
-
 }
