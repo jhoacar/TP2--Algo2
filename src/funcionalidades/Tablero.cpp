@@ -145,6 +145,20 @@ void Tablero::mostrar_tablero(){
 
 	for(int i=0; i < filas ; i++){
 
+        if(i==0){
+            cout<<"    ";
+            for(int j=0; j < columnas; j++){
+                
+                if(j % (columnas/2) == 0 ){
+                    cout<<" | ";
+                }
+                cout<<" "<<(j+1)<<" ";
+            }
+
+            cout<<endl;
+        }
+
+
         if(i % (filas/2) == 0 ){
 
             for(int j=0; j < columnas + 3 ; j++)
@@ -153,17 +167,22 @@ void Tablero::mostrar_tablero(){
             cout<<endl;
         }
 		
-        for(int j=0; j < columnas ; j++){
+        for(int j=-1; j < columnas ; j++){
 
-            if(j % (columnas/2) == 0 ){
-                cout<<" | ";
-            }    
+            if(j==-1)
+                cout<<" "<< (i < 9? " "+to_string(i+1) : to_string(i+1) )<<" ";
+            else{
+                
+                if(j % (columnas/2) == 0 ){
+                    cout<<" | ";
+                }    
 
-        	if(objetos[i][j]!=nullptr){
-        		cout<<" "<<objetos[i][j]->obtener_nombre()<<" ";
-            }
-        	else{
-        		cout<<" * ";
+                if(objetos[i][j]!=nullptr){
+                    cout<<" "<<objetos[i][j]->obtener_nombre()<<" ";
+                }
+                else{
+                    cout<<" * ";
+                }
             }
         }    
 

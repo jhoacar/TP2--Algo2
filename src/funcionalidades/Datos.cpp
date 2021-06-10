@@ -38,9 +38,6 @@ Datos::Datos(const string nombre_archivo)
 		cargar_objetos(datos);
 	
 		cargar_tablero();
-
-		cout<<"Se cargo todo correctamente"<<endl;
-	
 	}
 }
 

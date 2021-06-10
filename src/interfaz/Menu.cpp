@@ -85,6 +85,7 @@ void Menu::menu_resumen(){
 }
 
 void Menu::menu_letra_incorrecta(){
+    
     limpiar_pantalla();
     
     if(!mostrar_fichero("letra_incorrecta")){
@@ -156,7 +157,7 @@ Coordenada Menu::pedir_posicion(){
     if(numero_fila==NO_ENCONTRADO||numero_columna==NO_ENCONTRADO)
         return POSICION_FALSA;
     else{
-        Coordenada posicion(numero_columna-1,numero_fila-1);
+        Coordenada posicion(numero_columna,numero_fila);
         return posicion;
     }
     
@@ -185,14 +186,6 @@ char Menu::pedir_cuadrante(){
 }
 
 void Menu::menu_buscar_objeto(){
-    
-    limpiar_pantalla();
-    
-    if(!mostrar_fichero("busqueda_cuadrante")){
-
-        limpiar_pantalla();
-        cout<<"Busqueda Cuadrante\n";
-    }
 
     char cuadrante=0;
 	char nombre=opciones[SALIR];
@@ -234,15 +227,6 @@ void Menu::menu_buscar_objeto(){
 
 void Menu::menu_agregar_objeto(){
     
-    limpiar_pantalla();
-
-    if(!mostrar_fichero("agregar_objeto")){
-
-        limpiar_pantalla();
-
-        cout<<"Agregar Objeto"<<endl;
-    }
-
     char nombre;    
     int cantidad=1;
     Coordenada posicion;
@@ -267,7 +251,7 @@ void Menu::menu_agregar_objeto(){
                 indice_nombre = buscar_dato(NOMBRES,MAX_OBJETOS,objeto->obtener_nombre());
             
                 cout<<"Se encontro el objeto de Nombre: "<<OBJETOS[indice_nombre];
-                cout<<" en la posicion: ( "<<objeto->obtener_posicion().obtener_x()+1<<" , "<<objeto->obtener_posicion().obtener_y()+1<<" )"<<endl;
+                cout<<" en la posicion: ( "<<objeto->obtener_posicion().obtener_x()<<" , "<<objeto->obtener_posicion().obtener_y()<<" )"<<endl;
                 cout<<"No se pudo agregar el objeto. "<<endl;
             }
             else{
@@ -289,15 +273,6 @@ void Menu::menu_agregar_objeto(){
 }
 void Menu::menu_eliminar_objeto(){
 
-    limpiar_pantalla();
-
-    if(!mostrar_fichero("eliminar_objeto")){
-
-        limpiar_pantalla();
-
-        cout<<"Eliminar Objeto"<<endl;
-    }
-
     Coordenada posicion;
     bool eliminado=false;
     
@@ -314,16 +289,8 @@ void Menu::menu_eliminar_objeto(){
     }
     pausa();
 }
+
 void Menu::menu_mostrar_objeto(){
-
-    limpiar_pantalla();
-
-    if(!mostrar_fichero("mostrar_objeto")){
-
-        limpiar_pantalla();
-
-        cout<<"Mostrar Objeto"<<endl;
-    }
 
     Coordenada posicion;
     Objeto *objeto;

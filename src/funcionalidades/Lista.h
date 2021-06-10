@@ -4,10 +4,6 @@
 
 #include "Nodo.h"
 
-#include <typeinfo>
-
-#include "../objetos/Objeto.h"
-
 template <class Dato>
 class Lista
 {
@@ -51,41 +47,6 @@ class Lista
 		
 };
 
-template<class Dato_Puntero>
-class Lista_Punteros : public Lista<Dato_Puntero>
-{
-	public:
-		void limpiar_punteros(){
-			
-			Nodo<Dato_Puntero> *tmp;
-			while( this->inicio != nullptr ){
-				
-				tmp = this->inicio;
-
-				this->inicio = this->inicio->siguiente;
-
-				if( this->inicio != nullptr)
-					delete *(tmp->dato);
-				
-				tmp=nullptr;
-			}				
-		
-		}
-		Lista_Punteros();
-		~Lista_Punteros();
-};
-
-
-template <class Dato_Puntero>
-Lista_Punteros<Dato_Puntero>::Lista_Punteros():Lista<Dato_Puntero>(){
-
-}
-template <class Dato_Puntero>
-Lista_Punteros<Dato_Puntero>::~Lista_Punteros(){
-	//limpiar_punteros();
-}
-
-
 template <class Dato>
 Lista<Dato>::Lista()
 {
@@ -103,7 +64,7 @@ Lista<Dato>::~Lista()
 {
 	Nodo<Dato> *tmp;
 
-	while( inicio!=nullptr )//&& typeid(inicio->dato)!=typeid(Objeto*))
+	while( inicio!=nullptr )
 	{
 		
 		tmp = inicio;

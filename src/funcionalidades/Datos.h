@@ -20,7 +20,7 @@ enum {AGUA=0,BALA,CRUZ,ESTACA,ESCOPETA,HUMANO,HUMANO_CAZADOR,VANESA,VAMPIRO,VAMP
 
 class Datos
 {
-	Lista_Punteros<Objeto *> objetos;
+	Lista<Objeto *> objetos;
 	Tablero *tablero;
 
 	/*

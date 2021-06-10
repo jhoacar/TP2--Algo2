@@ -8,15 +8,55 @@ class Menu
 {
 	Datos *datos;
 	public:
+		/*
+		PRE:
+		POST: Crea un menu con todos los datos del fichero 
+		*/
 		Menu(string archivo);
+		/*
+		PRE:
+		POST: Elimina todos los datos reservados
+		*/
 		~Menu();
+		/*
+		PRE:
+		POST: Muestra el menu solicitando los datos
+		*/
 		void mostrar_menu();
+		/*
+		PRE:
+		POST: Muestra el resumen solicitando una impresion completa de los datos
+		*/
 		void menu_resumen();
+		/*
+		PRE:
+		POST: Muestra el tablero
+		*/
 		void menu_tablero();
+		/*
+		PRE:
+		POST: Muestra el menu de buscar el objeto por cuadrante
+		*/
 		void menu_buscar_objeto();
+		/*
+		PRE:
+		POST: Muestra el menu de agregar el objeto 
+		*/
 		void menu_agregar_objeto();
+		/*
+		PRE:
+		POST:
+		*/
 		void menu_eliminar_objeto();
+		/*
+		PRE:
+		POST:
+		*/
 		void menu_mostrar_objeto();
+		/*
+		PRE:
+		POST:
+		*/
 		void menu_letra_incorrecta();
 		/*
 		PRE:
