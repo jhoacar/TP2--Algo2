@@ -23,10 +23,12 @@ using std::endl;
 
 Datos::Datos(const string nombre_archivo)
 {
+	tablero=nullptr;
+
 	string texto = obtener_texto(nombre_archivo);
 	
 	if(texto.length()==0)
-	
+
 		std::cout<<"No se pudieron extraer los datos del archivo "<<nombre_archivo<<endl;
 	
 	else{
@@ -271,5 +273,12 @@ Objeto* Datos::buscar_objeto(Coordenada posicion){
 	}
 
 	return encontrado ? objetos[indice] : nullptr;
+
+}
+
+bool Datos::agregar_objeto(Objeto *objeto){
+
+	this->objetos.agregar(objeto);
+	this->tablero->cargar_objeto(objeto);
 
 }

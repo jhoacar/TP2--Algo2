@@ -4,7 +4,7 @@
 
 using namespace std;
 
-const char opciones[8] = "ABCDEFQ";
+const char OPCIONES_MENU[8] = "ABCDEFQ";
 
 const Coordenada POSICION_FALSA = {-1,-1};
 
@@ -12,9 +12,10 @@ const int MAX_CANTIDAD_ELEMENTO = 10000;
 
 enum {RESUMEN=0,TABLERO,BUSQUEDA,AGREGAR,ELIMINAR,MOSTRAR,SALIR};
 
-Menu::Menu(string nombre)
+Menu::Menu(string nombre_archivo)
 {
-    datos = new Datos(nombre);
+    datos = new Datos(nombre_archivo);
+    
 }
 
 Menu::~Menu()
@@ -23,11 +24,14 @@ Menu::~Menu()
 }
 
 
-void Menu::mostrar_menu(){
+bool Menu::mostrar_menu(){
+
+    if(datos->obtener_tablero()==nullptr)
+        return false;
 
     string respuesta=" ";
     
-    while(respuesta[0]!=opciones[SALIR]){
+    while(respuesta[0]!=OPCIONES_MENU[SALIR]){
         
         limpiar_pantalla();
         
@@ -41,14 +45,16 @@ void Menu::mostrar_menu(){
         getline(cin,respuesta,'\n');
         respuesta = cadena_mayuscula(respuesta);
 
-        if      (respuesta[0] == opciones[RESUMEN])    menu_resumen();
-        else if (respuesta[0] == opciones[TABLERO])    menu_tablero();
-        else if (respuesta[0] == opciones[BUSQUEDA])   menu_buscar_objeto();
-        else if (respuesta[0] == opciones[AGREGAR])    menu_agregar_objeto();
-        else if (respuesta[0] == opciones[ELIMINAR])   menu_eliminar_objeto();
-        else if (respuesta[0] == opciones[MOSTRAR])    menu_mostrar_objeto();
-        else if (respuesta[0] != opciones[SALIR])      menu_letra_incorrecta();
+        if      (respuesta[0] == OPCIONES_MENU[RESUMEN])    menu_resumen();
+        else if (respuesta[0] == OPCIONES_MENU[TABLERO])    menu_tablero();
+        else if (respuesta[0] == OPCIONES_MENU[BUSQUEDA])   menu_buscar_objeto();
+        else if (respuesta[0] == OPCIONES_MENU[AGREGAR])    menu_agregar_objeto();
+        else if (respuesta[0] == OPCIONES_MENU[ELIMINAR])   menu_eliminar_objeto();
+        else if (respuesta[0] == OPCIONES_MENU[MOSTRAR])    menu_mostrar_objeto();
+        else if (respuesta[0] != OPCIONES_MENU[SALIR])      menu_letra_incorrecta();
     }
+
+    return true;
 }
 
 void Menu::menu_tablero(){
@@ -99,29 +105,29 @@ void Menu::menu_letra_incorrecta(){
 
 char Menu::pedir_objeto(){
 
-    string menu_opciones;
+    string menu_OPCIONES_MENU;
     string menu_error;
 
-    menu_opciones = "\nIngrese el numero del objeto que desea:\n";
-    menu_opciones +="\t01) Agua \n";
-    menu_opciones +="\t02) Bala \n";
-    menu_opciones +="\t03) Cruz \n";
-    menu_opciones +="\t04) Estaca \n";
-    menu_opciones +="\t05) Escopeta \n";
-    menu_opciones +="\t06) Humano \n";
-    menu_opciones +="\t07) Humano Cazador \n";
-    menu_opciones +="\t08) Humano Vanesa \n";
-    menu_opciones +="\t09) Vampiro \n";
-    menu_opciones +="\t10) Vampiro Vampirella \n";
-    menu_opciones +="\t11) Vampiro Nosferatu \n";
-    menu_opciones +="\t12) Zombi \n\n";
-    menu_opciones +="\tq) Regresar: ";
+    menu_OPCIONES_MENU = "\nIngrese el numero del objeto que desea:\n";
+    menu_OPCIONES_MENU +="\t01) Agua \n";
+    menu_OPCIONES_MENU +="\t02) Bala \n";
+    menu_OPCIONES_MENU +="\t03) Cruz \n";
+    menu_OPCIONES_MENU +="\t04) Estaca \n";
+    menu_OPCIONES_MENU +="\t05) Escopeta \n";
+    menu_OPCIONES_MENU +="\t06) Humano \n";
+    menu_OPCIONES_MENU +="\t07) Humano Cazador \n";
+    menu_OPCIONES_MENU +="\t08) Humano Vanesa \n";
+    menu_OPCIONES_MENU +="\t09) Vampiro \n";
+    menu_OPCIONES_MENU +="\t10) Vampiro Vampirella \n";
+    menu_OPCIONES_MENU +="\t11) Vampiro Nosferatu \n";
+    menu_OPCIONES_MENU +="\t12) Zombi \n\n";
+    menu_OPCIONES_MENU +="\tq) Regresar: ";
     menu_error = "\n\tIngrese un numero comprendido entre 1 y 12, o 'q' para salir";
 
-    int opcion = pedir_dato(menu_opciones,menu_error,1,12,opciones[SALIR]);
+    int opcion = pedir_dato(menu_OPCIONES_MENU , menu_error , 1 , 12 , OPCIONES_MENU[SALIR]);
 
     if(opcion==NO_ENCONTRADO)
-        return opciones[SALIR];
+        return OPCIONES_MENU[SALIR];
     else
         return NOMBRES[opcion-1];
 }
@@ -134,24 +140,24 @@ Coordenada Menu::pedir_posicion(){
     int numero_fila=0;
     int numero_columna=0;
 
-    string menu_opciones;
+    string menu_OPCIONES_MENU;
     string menu_error;
 
-    menu_opciones  ="\nIngrese un numero comprendido entre 1 y "+to_string(fila);
-    menu_opciones +="\n(Numero de la fila donde desea posicionarlo o 'q' para salir) : ";
+    menu_OPCIONES_MENU  ="\nIngrese un numero comprendido entre 1 y "+to_string(fila);
+    menu_OPCIONES_MENU +="\n(Numero de la fila donde desea posicionarlo o 'q' para salir) : ";
     menu_error     ="\nDebe ingresar un numero comprendido entre 1 y "+to_string(fila);
-    menu_error    +="\n(Numero de la fila donde desea posicionarlo o'q' para salir)";
+    menu_error    +=" o'q' para salir";
     
-    numero_fila= pedir_dato(menu_opciones,menu_error,1,fila,opciones[SALIR]);
+    numero_fila= pedir_dato(menu_OPCIONES_MENU,menu_error,1,fila,OPCIONES_MENU[SALIR]);
 
     if(numero_fila!=NO_ENCONTRADO){
 
-        menu_opciones ="\nIngrese un numero comprendido entre 1 y "+to_string(columna);
-        menu_opciones+="\n(Numero de la columna donde desea posicionarlo o 'q' para salir) : ";
+        menu_OPCIONES_MENU ="\nIngrese un numero comprendido entre 1 y "+to_string(columna);
+        menu_OPCIONES_MENU+="\n(Numero de la columna donde desea posicionarlo o 'q' para salir) : ";
         menu_error   ="\nDebe ingresar un numero comprendido entre 1 y "+to_string(columna);
-        menu_error  +="\n(Numero de la columna donde desea posicionarlo o 'q' para salir)";
+        menu_error  +=" o 'q' para salir)";
 
-        numero_columna = pedir_dato(menu_opciones,menu_error,1,columna,opciones[SALIR]);
+        numero_columna = pedir_dato(menu_OPCIONES_MENU,menu_error,1,columna,OPCIONES_MENU[SALIR]);
     }
 
     if(numero_fila==NO_ENCONTRADO||numero_columna==NO_ENCONTRADO)
@@ -165,21 +171,21 @@ Coordenada Menu::pedir_posicion(){
 
 char Menu::pedir_cuadrante(){
     
-    string menu_opciones;
+    string menu_OPCIONES_MENU;
     string menu_error;
 
-    menu_opciones = "\nIngrese el numero del cuadrante que desea:\n";
-    menu_opciones +="\t1) NO : Norte Oeste \n";
-    menu_opciones +="\t2) SO : Sur Oeste \n";
-    menu_opciones +="\t3) NE : Norte Este \n";
-    menu_opciones +="\t4) SE : Sur Este \n\n";
-    menu_opciones +="\tq) Regresar: ";
+    menu_OPCIONES_MENU = "\nIngrese el numero del cuadrante que desea:\n";
+    menu_OPCIONES_MENU +="\t1) NO : Norte Oeste \n";
+    menu_OPCIONES_MENU +="\t2) SO : Sur Oeste \n";
+    menu_OPCIONES_MENU +="\t3) NE : Norte Este \n";
+    menu_OPCIONES_MENU +="\t4) SE : Sur Este \n\n";
+    menu_OPCIONES_MENU +="\tq) Regresar: ";
     menu_error = "\n\tIngrese un numero comprendido entre 1 y 4, o 'q' para salir";
 
-    int opcion = pedir_dato(menu_opciones,menu_error,1,4,opciones[SALIR]);
+    int opcion = pedir_dato(menu_OPCIONES_MENU,menu_error,1,4,OPCIONES_MENU[SALIR]);
 
     if(opcion==NO_ENCONTRADO)
-        return opciones[SALIR];
+        return OPCIONES_MENU[SALIR];
     else
         return (char)opcion;
     
@@ -188,19 +194,19 @@ char Menu::pedir_cuadrante(){
 void Menu::menu_buscar_objeto(){
 
     char cuadrante=0;
-	char nombre=opciones[SALIR];
+	char nombre=OPCIONES_MENU[SALIR];
     Objeto *objeto=nullptr;
     int indice_nombre;
 
-    while(nombre==opciones[SALIR]){
+    while(nombre==OPCIONES_MENU[SALIR]){
 
         cuadrante = pedir_cuadrante();
 
-        if(cuadrante != opciones[SALIR]){
+        if(cuadrante != OPCIONES_MENU[SALIR]){
             
             nombre = pedir_objeto();
 
-            if(nombre != opciones[SALIR]){
+            if(nombre != OPCIONES_MENU[SALIR]){
 
                 objeto = datos->buscar_objeto( CARDINALES[(int)cuadrante-1] , nombre);
                 
@@ -235,10 +241,10 @@ void Menu::menu_agregar_objeto(){
 
     nombre = pedir_objeto();
 
-    if(nombre!=opciones[SALIR]){
+    if(nombre!=OPCIONES_MENU[SALIR]){
         
         if(nombre == NOMBRES[AGUA] || nombre == NOMBRES[BALA])
-            cantidad = pedir_dato("\nIngrese la cantidad (mayor a 0): ","\nIngrese una cantidad mayor a 0 ",1,MAX_CANTIDAD_ELEMENTO,opciones[SALIR]);
+            cantidad = pedir_dato("\nIngrese la cantidad (mayor a 0): ","\nIngrese una cantidad mayor a 0 ",1,MAX_CANTIDAD_ELEMENTO,OPCIONES_MENU[SALIR]);
 
         posicion = pedir_posicion();
 
@@ -257,13 +263,19 @@ void Menu::menu_agregar_objeto(){
             else{
                 
                 indice_nombre = buscar_dato(NOMBRES,MAX_OBJETOS,nombre);
-            
+
                 objeto = datos->crear_objeto(indice_nombre,nombre,posicion,cantidad);
 
-                datos->obtener_tablero()->cargar_objeto(objeto);
-
-                cout<<"Se agrego el objeto de Nombre: "<<OBJETOS[indice_nombre];
-                cout<<" en la posicion: ( "<<posicion.obtener_x()+1<<" , "<<posicion.obtener_y()+1<<" )"<<endl;
+                bool es_agregado = datos->agregar_objeto(objeto);
+                
+                if(es_agregado){
+                    
+                    cout<<"Se agrego el objeto de Nombre: "<<OBJETOS[indice_nombre];
+                    cout<<" en la posicion: ( "<<posicion.obtener_x()<<" , "<<posicion.obtener_y()<<" )"<<endl;
+                    
+                }
+                else
+                    cout<<"Ocurrio un error al agregar el objeto"<<endl;
             }
 
             pausa();

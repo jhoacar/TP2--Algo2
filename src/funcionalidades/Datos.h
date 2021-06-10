@@ -105,6 +105,11 @@ class Datos
 		POST: Devuelve el objeto creado con dichas especificaciones
 		*/
 		Objeto* crear_objeto(const int tipo,const char nombre,Coordenada posicion,const int cantidad);
+		/*
+		PRE: Un objeto cargado a agregar
+		POST: Se agrega un objeto a la lista de objetos y al tablero
+		*/
+		bool agregar_objeto(Objeto *);
 		
 	protected:
 };

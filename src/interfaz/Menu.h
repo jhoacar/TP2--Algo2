@@ -9,10 +9,10 @@ class Menu
 	Datos *datos;
 	public:
 		/*
-		PRE:
+		PRE: Un string con el archivo para extraer los datos
 		POST: Crea un menu con todos los datos del fichero 
 		*/
-		Menu(string archivo);
+		Menu(string nombre_archivo);
 		/*
 		PRE:
 		POST: Elimina todos los datos reservados
@@ -20,9 +20,10 @@ class Menu
 		~Menu();
 		/*
 		PRE:
-		POST: Muestra el menu solicitando los datos
+		POST: Muestra el menu solicitando los datos, si no fueron cargados los datos,
+		devuelve falso, caso contrario verdadero.
 		*/
-		void mostrar_menu();
+		bool mostrar_menu();
 		/*
 		PRE:
 		POST: Muestra el resumen solicitando una impresion completa de los datos
@@ -40,28 +41,28 @@ class Menu
 		void menu_buscar_objeto();
 		/*
 		PRE:
-		POST: Muestra el menu de agregar el objeto 
+		POST: Solicita la posicon, cantidad, y nombre del objeto a agregar al tablero
 		*/
 		void menu_agregar_objeto();
 		/*
 		PRE:
-		POST:
+		POST: Solicita al usuario la posicion y muestra si pudo eliminar el objeto
 		*/
 		void menu_eliminar_objeto();
 		/*
 		PRE:
-		POST:
+		POST: Solicita al usuario la posicion y muestra la informacion del objeto
 		*/
 		void menu_mostrar_objeto();
 		/*
 		PRE:
-		POST:
+		POST: Muestra la opcion de letra incorrecta de un fichero o impresion comun
 		*/
 		void menu_letra_incorrecta();
 		/*
 		PRE:
 		POST: Devuelve la opcion de salir (Q) si decide salir
-			o un numero comprendido entre los cuatro cardinales en formato char (n<4)
+			o un numero comprendido entre los cuatro cardinales en formato char (numero menor a 4)
 		*/
 		char pedir_cuadrante();
 		/*

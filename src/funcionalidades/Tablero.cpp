@@ -101,7 +101,7 @@ void Tablero::cargar_objeto(Objeto *objeto){
 
         Coordenada posicion = objeto->obtener_posicion();
 
-        posicion-=1;
+        posicion-=1; //Le resto una posicion para guardarla correctamente en el tablero arrancando en (0,0)
 
         if(posicion_valida(posicion)){
 
