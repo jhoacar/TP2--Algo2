@@ -6,13 +6,13 @@
 
 [TOC]
 
-####Linea de compilacion
+##Linea de compilacion
 Previamente de haber instalado `build-essential` y `make` se puede compilar el proyecto, ejecutando el comando  `$ make`.
 El proyecto se compilara con flags de `gdb` para su depuracion y cada `.o` del proyecto generado sera guardado en la carpeta `$ ./obj/...` con el mismo orden, en caso de desear eliminarlos, se debera ejecutar el comando `$ make clean`.
 Tambien se puede revisar la memoria luego de compilacion con `valgrind` ejecutando 
 	`$ make valgrind`
 
-###Imagenes
+##Imagenes
 
 ![](https://i.ibb.co/k9Mbb7X/compilacion.jpg)
 
@@ -22,7 +22,7 @@ Tambien se puede revisar la memoria luego de compilacion con `valgrind` ejecutan
 
 > Proyecto en ejecucion ubicado en el Menu Principal .
 
-###Lista de Clases
+##Lista de Clases
 
 + SRC
 	+ FUNCIONALIDADES
