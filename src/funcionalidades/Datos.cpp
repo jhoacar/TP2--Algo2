@@ -220,7 +220,7 @@ void Datos::mostrar_resumen(){
 
 	pausa();
 
-	int respuesta = pedir_dato("\n\tDesea visualizar los datos completos de los objetos?\n(1) SI\n(0 o ENTER) NO ","\n\tIngrese 1 (SI) o 0 o ENTER (NO)\n",1,2,0);
+	int respuesta = pedir_dato("\n\tDesea visualizar los datos completos de los objetos?\n(1) SI\n(ENTER) NO ","\n\tIngrese 1 (SI) o ENTER (NO)\n",1,2,0);
 	if(respuesta ==1)
 		mostrar_datos();
 }
