@@ -46,9 +46,7 @@ Datos::Datos(const string nombre_archivo)
 
 Datos::~Datos()
 {
-	cout<<"Eliminando tablero"<<endl;
 	delete tablero;
-	cout<<"Tablero eliminado"<<endl;
 }
 
 void Datos::cargar_tablero(){
@@ -215,7 +213,7 @@ void Datos::mostrar_resumen(){
     cout<<"HUMANOS\t\t"<<cantidad_humanos<<"\t\t\t"	<<(cantidad_seres		!=0?100*(float)cantidad_humanos/(float)cantidad_seres:	  0)<<endl;
     cout<<"ZOMBIS\t\t"<<cantidad_zombies<<"\t\t\t"	<<(cantidad_seres		!=0?100*(float)cantidad_zombies/(float)cantidad_seres:	  0)<<endl;
     cout<<"VAMPIROS\t"<<cantidad_vampiros<<"\t\t\t"	<<(cantidad_seres		!=0?100*(float)cantidad_vampiros/(float)cantidad_seres:	  0)<<endl;
-    cout<<"AGUA BENDITA\t"<<cantidad_agua<<"\t\t\t"	<<(cantidad_seres		!=0?100*(float)cantidad_agua/(float)cantidad_elementos:	  0)<<endl;
+    cout<<"AGUA BENDITA\t"<<cantidad_agua<<"\t\t\t"	<<(cantidad_elementos	!=0?100*(float)cantidad_agua/(float)cantidad_elementos:	  0)<<endl;
     cout<<"CRUCES\t\t"<<cantidad_cruces<<"\t\t\t"	<<(cantidad_elementos	!=0?100*(float)cantidad_cruces/(float)cantidad_elementos: 0)<<endl;
     cout<<"ESTACAS\t\t"<<cantidad_estacas<<"\t\t\t"	<<(cantidad_elementos	!=0?100*(float)cantidad_estacas/(float)cantidad_elementos:0)<<endl;
     cout<<"ESCOPETAS\t"<<cantidad_escopetas<<"\t\t\t"<<(cantidad_balas		!=0?100*(float)cantidad_escopetas/(float)cantidad_balas:  0)<<endl;

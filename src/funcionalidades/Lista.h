@@ -1,18 +1,20 @@
 #ifndef LISTA_H
 #define LISTA_H
 
-#include <iostream>
-using namespace std;
 
 #include "Nodo.h"
+
 #include <typeinfo>
+
+#include "../objetos/Objeto.h"
 
 template <class Dato>
 class Lista
 {
-	Nodo<Dato> *inicio;
-	Nodo<Dato> *fin;
-	size_t tamano;
+	protected:
+		Nodo<Dato> *inicio;
+		Nodo<Dato> *fin;
+		size_t tamano;
 	public:
 		Lista();
 		~Lista();
@@ -47,8 +49,42 @@ class Lista
 		*/
 		void operator=(const Lista);
 		
-	protected:
 };
+
+template<class Dato_Puntero>
+class Lista_Punteros : public Lista<Dato_Puntero>
+{
+	public:
+		void limpiar_punteros(){
+			
+			Nodo<Dato_Puntero> *tmp;
+			while( this->inicio != nullptr ){
+				
+				tmp = this->inicio;
+
+				this->inicio = this->inicio->siguiente;
+
+				if( this->inicio != nullptr)
+					delete *(tmp->dato);
+				
+				tmp=nullptr;
+			}				
+		
+		}
+		Lista_Punteros();
+		~Lista_Punteros();
+};
+
+
+template <class Dato_Puntero>
+Lista_Punteros<Dato_Puntero>::Lista_Punteros():Lista<Dato_Puntero>(){
+
+}
+template <class Dato_Puntero>
+Lista_Punteros<Dato_Puntero>::~Lista_Punteros(){
+	//limpiar_punteros();
+}
+
 
 template <class Dato>
 Lista<Dato>::Lista()
@@ -65,44 +101,25 @@ Lista<Dato>::Lista()
 template <class Dato>
 Lista<Dato>::~Lista()
 {
-	cout<<"Eliminando lista"<<endl;
+	Nodo<Dato> *tmp;
 
-	if(inicio != nullptr){
-
-		//Nodo<Dato> *aux;
-		//aux = inicio->siguiente;
-		//size_t i=0; 
-		//while( aux!=nullptr ){
-			
-		//	cout<<"Eliminando el "<<i++<<"elemento de la lista"<<endl;
-
-			//if(typeid(Dato) == typeid(Objeto*))
-			//{
-		//		delete aux->dato;
-				//cout<<aux->dato;
-				//((Objeto*)aux->dato)->mostrar();
-				//system("pause");
-			//}
-			
-			//aux = aux->siguiente;
-		//}
-
-		delete inicio;
-
+	while( inicio!=nullptr )//&& typeid(inicio->dato)!=typeid(Objeto*))
+	{
+		
+		tmp = inicio;
+		
+		inicio = inicio->siguiente;
+		
+		delete tmp;
+		
+		tmp=nullptr;
 	}
-	
-
-	inicio=nullptr;
-
-	fin=nullptr;
-
-	cout<<"Lista eliminada"<<endl;
 }
 
 template <class Dato>
 void Lista<Dato>::agregar(Dato dato){
 
-	(*fin->dato)=dato;
+	*fin->dato=dato;
 
 	fin->siguiente = new Nodo<Dato>();
 
