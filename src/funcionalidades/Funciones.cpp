@@ -9,13 +9,6 @@ using std::cin;
 
 const string NO_NUMERO = "-1";
 
-const size_t CANTIDAD_COLORES = 3; 
-
-const string COLORES [CANTIDAD_COLORES] = {"VERDE","AMARILLO"};
-
-enum {VERDE=0,AMARILLO};
-
-const string ANSI_COLOR[CANTIDAD_COLORES] = {};
 
 #ifdef __linux__
 #define LIMPIAR "clear"
@@ -32,13 +25,10 @@ void pausa(){
 }
 #endif // __MINGW32__
 
-void color(string color){
+void color(int color){
 
-	int indice_color = buscar_dato(COLORES,CANTIDAD_COLORES,color);
-
-	if(indice_color != NO_ENCONTRADO)
-
-		cout<<"\033[0;"<<ANSI_COLOR[indice_color]<<";32m";
+	if(color >= 0 && color< CANTIDAD_COLORES)
+		cout<<ANSI_COLOR[color];
 }
 
 void limpiar_pantalla(){
@@ -130,7 +120,7 @@ int convertir_entero(string cadena){
 
 }
 
-int pedir_dato(string opciones,string error,int inicio,int fin,char opcion_salir){
+int pedir_dato(string opciones_menu,string error,int inicio,int fin,char opcion_salir){
 
 	string respuesta;
 	bool bandera = false;
@@ -139,7 +129,7 @@ int pedir_dato(string opciones,string error,int inicio,int fin,char opcion_salir
 
 		limpiar_pantalla();
 
-		cout<<opciones;
+		cout<<opciones_menu;
 		
 		getline(cin,respuesta,'\n');
 		
@@ -148,7 +138,7 @@ int pedir_dato(string opciones,string error,int inicio,int fin,char opcion_salir
 		if(respuesta[0]==opcion_salir)
 			return NO_ENCONTRADO;
 		else
-			bandera = convertir_entero(respuesta)>=inicio && convertir_entero(respuesta)<=fin;
+			bandera = convertir_entero(respuesta) >= inicio && convertir_entero(respuesta) <= fin;
 
 		if(!bandera){
 			cout<<error<<endl;
@@ -169,7 +159,7 @@ bool mostrar_fichero(string name){
         mostrar.replace(mostrar.find("\\"),1,"\\\\");
 
         cout<<mostrar;
-
+		
         return true;
     }
     else

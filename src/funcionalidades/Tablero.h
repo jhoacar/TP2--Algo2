@@ -64,7 +64,11 @@ class Tablero
 		POST: Muestra el tablero con un formato especifico
 		*/
 		void mostrar_tablero();
-		
+		/*
+		PRE:
+		POST: Muestra en la pantalla la convencion de letras para el tablero y sus personajes
+		*/
+		void mostrar_leyenda();
 	protected:
 };
 

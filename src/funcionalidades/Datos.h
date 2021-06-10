@@ -7,13 +7,17 @@
 using std::string;
 using std::type_info;
 
-const size_t MAX_OBJETOS = 12;
+const size_t MAX_NOMBRES = 12;
 
 const string CAZADOR = "CV";
 
-const string OBJETOS[MAX_OBJETOS]=	{"agua","bala","cruz","estaca","escopeta","humano","humano CV","Vanesa","vampiro","Vampirella","Nosferatu","zombi"};
 
-const char NOMBRES[MAX_OBJETOS]=	{'a',	'b',	'c',	'e',	'E',		'h',		'H',	'W',		'v',		'V',		'N',	'z'};
+//Convencion usada para este proyecto en los nombre,cardinales,colores,etc... 
+//Con las variables enumeradas obtengo una equivalencia (int) en char y string del nombre del objeto que se desea
+
+const string NOMBRES_STRING[MAX_NOMBRES]=	{"agua","bala","cruz","estaca","escopeta","humano","humano CV","Vanesa","vampiro","Vampirella","Nosferatu","zombi"};
+
+const char NOMBRES_CHAR[MAX_NOMBRES]=	{'a',	'b',	'c',	'e',	'E',		'h',		'H',	'W',		'v',		'V',		'N',	'z'};
 
 enum {AGUA=0,BALA,CRUZ,ESTACA,ESCOPETA,HUMANO,HUMANO_CAZADOR,VANESA,VAMPIRO,VAMPIRELLA,NOSFERATU,ZOMBIE};
 
@@ -72,14 +76,14 @@ class Datos
 		~Datos();
 		/*
 		PRE:
-		POST: Muestra el resumen estadistico de los objetos, con el porcentaje de cada uno
+		POST: Devuelve un string con el resumen estadistico de los objetos y el porcentaje de cada uno
 		*/
-		void mostrar_resumen();
+		string obtener_resumen();
 		/*
 		PRE:
-		POST: Muestra en detalle cada objeto y sus atributos 
+		POST: Devuelve un string con el detalle de cada objeto y sus atributos 
 		*/
-		void mostrar_datos();
+		string obtener_datos();
 		/*
 		PRE:
 		POST: Devuelve el tablero 
@@ -92,14 +96,14 @@ class Datos
 		int obtener_cantidad(int tipo_objeto);
 		/*
 		PRE: Una cadena referente al cuadrante y el nombre del objeto a buscar
-		POST: Devuelve un puntero del objeto encontrado 
+		POST: Devuelve un entero con el indice del objeto encontrado o NO_ENCONTRADO (-1) si no se encuentra
 		*/
-		Objeto* buscar_objeto(string cuadrante,char nombre);
+		int buscar_objeto(string cuadrante,char nombre);
 		/*
 		PRE: Una posicion del objeto a buscar
-		POST: Devuelve un puntero del objeto encontrado  
+		POST: Devuelve un entero con el indice del objeto encontrado o NO_ENCONTRADO (-1) si no se encuentra
 		*/
-		Objeto* buscar_objeto(Coordenada posicion);
+		int buscar_objeto(Coordenada posicion);
 		/*
 		PRE: Un tipo de objeto (agua, bala,...) el nombre que tendra, la posicion y la cantidad si es que la tiene
 		POST: Devuelve el objeto creado con dichas especificaciones
@@ -110,6 +114,16 @@ class Datos
 		POST: Se agrega un objeto a la lista de objetos y al tablero
 		*/
 		void agregar_objeto(Objeto *);
+		/*
+		PRE: Una posicion a buscar
+		POST: Devuelve verdadero si logro eliminar el objeto de la lista de objetos y del tablero, falso en caso contrario
+		*/
+		bool eliminar_objeto(Coordenada posicion);
+		/*
+		PRE: Un indice para buscar en la lista de objetos
+		POST: Devuelve el puntero de objeto encontrado en el indice de la lista
+		*/
+		Objeto *obtener_objeto(int indice);
 		
 	protected:
 };

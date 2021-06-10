@@ -127,6 +127,8 @@ int Tablero::obtener_columnas(){
 
 bool Tablero::eliminar_objeto(Coordenada posicion){
 
+    posicion-=1; //Le resto una posicion para eliminarlo correctamente en el tablero arrancando en (0,0)
+
     if(posicion_valida(posicion)){
         
         if(objetos[posicion.obtener_y()][posicion.obtener_x()]!=nullptr){
@@ -150,9 +152,13 @@ void Tablero::mostrar_tablero(){
             for(int j=0; j < columnas; j++){
                 
                 if(j % (columnas/2) == 0 ){
+                    color(ROJO);
                     cout<<" | ";
+                    color(RESET);
                 }
+                color(CYAN);
                 cout<<" "<<(j+1)<<" ";
+                color(RESET);
             }
 
             cout<<endl;
@@ -161,38 +167,74 @@ void Tablero::mostrar_tablero(){
 
         if(i % (filas/2) == 0 ){
 
-            for(int j=0; j < columnas + 3 ; j++)
+            for(int j=0; j < columnas + 3 ; j++){
+                
+                color(ROJO);
                 cout<<" _ ";
+                color(RESET);
+            }
 
             cout<<endl;
         }
 		
         for(int j=-1; j < columnas ; j++){
 
-            if(j==-1)
+            if(j==-1){
+                color(CYAN);
                 cout<<" "<< (i < 9? " "+to_string(i+1) : to_string(i+1) )<<" ";
+                color(RESET);
+            }
             else{
                 
                 if(j % (columnas/2) == 0 ){
+                    color(ROJO);
                     cout<<" | ";
+                    color(RESET);
                 }    
 
                 if(objetos[i][j]!=nullptr){
+                    
+                    color(AMARILLO);
                     cout<<" "<<objetos[i][j]->obtener_nombre()<<" ";
+                    color(RESET);
+                    
                 }
                 else{
                     cout<<" * ";
                 }
             }
         }    
-
+        color(ROJO);
         cout<<" | "<<endl;
+        color(RESET);
 	}
 
-    for(int j=0; j < columnas + 3 ; j++)
-        
-        cout<<" - ";
+    for(int j=0; j < columnas + 3 ; j++){
 
+        color(ROJO);
+        cout<<" - ";
+        color(RESET);
+    }
     cout<<endl;
 
+    mostrar_leyenda();
+}
+
+
+void Tablero::mostrar_leyenda(){
+
+    cout<<"\n\tCONVENCION USADA: "<<endl;
+    cout<<"\n-*: vacio";
+    cout<<"\n- h: humano simple";
+    cout<<"\n- H: humano caza vampiros-zombis";
+    cout<<"\n- W: Vanesa";
+    cout<<"\n- z: zombi";
+    cout<<"\n- v: vampiro";
+    cout<<"\n- V: Vampirella"; 
+    cout<<"\n- N: Nosferatu ";
+    cout<<"\n- c: cruz ";
+    cout<<"\n- a: agua bendita ";
+    cout<<"\n- e: estaca ";
+    cout<<"\n- E: escopeta ";
+    cout<<"\n- b: balas"<<endl;
 }

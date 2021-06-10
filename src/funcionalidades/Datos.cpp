@@ -16,10 +16,6 @@
 #include "../objetos/seres/monstruos/vampiros/Nosferatu.h"
 #include "../objetos/seres/monstruos/zombies/Zombie.h"
 
-#include <iostream>
-using std::cout;
-using std::string;
-using std::endl;
 
 Datos::Datos(const string nombre_archivo)
 {
@@ -135,7 +131,7 @@ int Datos::convertir_cantidad(Lista<string> &datos){
 		
 		cantidad = convertir_entero(datos[1]);
 
-	return cantidad == -1 ? -1 : cantidad;
+	return cantidad == NO_ENCONTRADO ? NO_ENCONTRADO : cantidad;
 }
 
 void Datos::cargar_objetos(Lista<string> &lineas){
@@ -150,9 +146,9 @@ void Datos::cargar_objetos(Lista<string> &lineas){
 
 		int 			cantidad_objeto = convertir_cantidad(division_datos);
 
-		int tipo = 	buscar_dato(OBJETOS,MAX_OBJETOS,nombre_objeto);
+		int tipo = 	buscar_dato(NOMBRES_STRING,MAX_NOMBRES,nombre_objeto);
 		
-		Objeto *objeto = crear_objeto(tipo	,	NOMBRES[tipo],	posicion_objeto,	cantidad_objeto);
+		Objeto *objeto = crear_objeto(tipo	,	NOMBRES_CHAR[tipo],	posicion_objeto,	cantidad_objeto);
 
 		this->objetos.agregar(objeto);
 	}
@@ -160,7 +156,7 @@ void Datos::cargar_objetos(Lista<string> &lineas){
 
 bool Datos::tiene_cantidad(Objeto *objeto){
 
-	return 	objeto->obtener_nombre() ==	NOMBRES[AGUA] || objeto->obtener_nombre() == NOMBRES[BALA];
+	return 	objeto->obtener_nombre() ==	NOMBRES_CHAR[AGUA] || objeto->obtener_nombre() == NOMBRES_CHAR[BALA];
 }
 
 int Datos::obtener_cantidad(int tipo_objeto){
@@ -168,7 +164,7 @@ int Datos::obtener_cantidad(int tipo_objeto){
 
 	for(size_t i=0;	i<objetos.obtener_tamano();	i++){
 
-		if(	this->objetos[i]->obtener_nombre()	==	NOMBRES[tipo_objeto]){
+		if(	this->objetos[i]->obtener_nombre()	==	NOMBRES_CHAR[tipo_objeto]){
 
 			if(	tiene_cantidad(objetos[i])	){
 
@@ -185,7 +181,7 @@ int Datos::obtener_cantidad(int tipo_objeto){
 	return cantidad;
 }
 
-void Datos::mostrar_resumen(){
+string Datos::obtener_resumen(){
 	
 	int cantidad_agua 		= obtener_cantidad(AGUA);
 	int cantidad_balas 		= obtener_cantidad(BALA);
@@ -208,31 +204,32 @@ void Datos::mostrar_resumen(){
 
 	int cantidad_elementos=	cantidad_agua + cantidad_cruces + cantidad_estacas;
 	
-    cout<<"ELEMENTO\tCANTIDAD\t\tPORCENTAJE"<<endl;
-    cout<<"HUMANOS\t\t"<<cantidad_humanos<<"\t\t\t"	<<(cantidad_seres		!=0?100*(float)cantidad_humanos/(float)cantidad_seres:	  0)<<endl;
-    cout<<"ZOMBIS\t\t"<<cantidad_zombies<<"\t\t\t"	<<(cantidad_seres		!=0?100*(float)cantidad_zombies/(float)cantidad_seres:	  0)<<endl;
-    cout<<"VAMPIROS\t"<<cantidad_vampiros<<"\t\t\t"	<<(cantidad_seres		!=0?100*(float)cantidad_vampiros/(float)cantidad_seres:	  0)<<endl;
-    cout<<"AGUA BENDITA\t"<<cantidad_agua<<"\t\t\t"	<<(cantidad_elementos	!=0?100*(float)cantidad_agua/(float)cantidad_elementos:	  0)<<endl;
-    cout<<"CRUCES\t\t"<<cantidad_cruces<<"\t\t\t"	<<(cantidad_elementos	!=0?100*(float)cantidad_cruces/(float)cantidad_elementos: 0)<<endl;
-    cout<<"ESTACAS\t\t"<<cantidad_estacas<<"\t\t\t"	<<(cantidad_elementos	!=0?100*(float)cantidad_estacas/(float)cantidad_elementos:0)<<endl;
-    cout<<"ESCOPETAS\t"<<cantidad_escopetas<<"\t\t\t"<<(cantidad_balas		!=0?100*(float)cantidad_escopetas/(float)cantidad_balas:  0)<<endl;
-    cout<<"BALAS\t\t"<<cantidad_balas<<"\t\t\t"		<<(cantidad_escopetas	!=0?100*(float)cantidad_balas/(float)cantidad_escopetas:  0)<<endl;
+    string resumen;
+	
+	
+	resumen = "ELEMENTO\tCANTIDAD\t\tPORCENTAJE\n";
+    resumen+="HUMANOS\t\t"+to_string(cantidad_humanos)+"\t\t\t"	+to_string(cantidad_seres		!=0?100*(float)cantidad_humanos/(float)cantidad_seres:	  0)+"\n";
+    resumen+="ZOMBIS\t\t"+to_string(cantidad_zombies)+"\t\t\t"	+to_string(cantidad_seres		!=0?100*(float)cantidad_zombies/(float)cantidad_seres:	  0)+"\n";
+    resumen+="VAMPIROS\t"+to_string(cantidad_vampiros)+"\t\t\t"	+to_string(cantidad_seres		!=0?100*(float)cantidad_vampiros/(float)cantidad_seres:	  0)+"\n";
+    resumen+="AGUA BENDITA\t"+to_string(cantidad_agua)+"\t\t\t"	+to_string(cantidad_elementos	!=0?100*(float)cantidad_agua/(float)cantidad_elementos:	  0)+"\n";
+    resumen+="CRUCES\t\t"+to_string(cantidad_cruces)+"\t\t\t"	+to_string(cantidad_elementos	!=0?100*(float)cantidad_cruces/(float)cantidad_elementos: 0)+"\n";
+    resumen+="ESTACAS\t\t"+to_string(cantidad_estacas)+"\t\t\t"	+to_string(cantidad_elementos	!=0?100*(float)cantidad_estacas/(float)cantidad_elementos:0)+"\n";
+    resumen+="ESCOPETAS\t"+to_string(cantidad_escopetas)+"\t\t\t"+to_string(cantidad_balas		!=0?100*(float)cantidad_escopetas/(float)cantidad_balas:  0)+"\n";
+    resumen+="BALAS\t\t"+to_string(cantidad_balas)+"\t\t\t"		+to_string(cantidad_escopetas	!=0?100*(float)cantidad_balas/(float)cantidad_escopetas:  0)+"\n";
 
-	pausa();
-
-	int respuesta = pedir_dato("\n\tDesea visualizar los datos completos de los objetos?\n(1) SI\n(ENTER) NO ","\n\tIngrese 1 (SI) o ENTER (NO)\n",1,2,0);
-	if(respuesta ==1)
-		mostrar_datos();
+	return resumen;
 }
 
-void Datos::mostrar_datos(){
+string Datos::obtener_datos(){
 
+	string datos = "";
 	for( size_t i=0; i<objetos.obtener_tamano(); i++){
 
-		cout<<endl<<"Objeto: "<<OBJETOS[buscar_dato(NOMBRES,MAX_OBJETOS,objetos[i]->obtener_nombre())]<<endl;
-		cout<<"Posicion: x = "<<objetos[i]->obtener_posicion().obtener_x()<<" y = "<<objetos[i]->obtener_posicion().obtener_y()<<endl;
-		cout<<"Cuadrante: "<<objetos[i]->obtener_cuadrante()<<endl;
+		datos+="\nObjeto: "+NOMBRES_STRING[buscar_dato(NOMBRES_CHAR,MAX_NOMBRES,objetos[i]->obtener_nombre())]+"\n";
+		datos+="Posicion: x = "+to_string(objetos[i]->obtener_posicion().obtener_x())+" y = "+to_string(objetos[i]->obtener_posicion().obtener_y())+"\n";
+		datos+="Cuadrante: "+objetos[i]->obtener_cuadrante()+"\n";
 	}
+	return datos;
 }
 
 Tablero* Datos::obtener_tablero(){
@@ -241,7 +238,7 @@ Tablero* Datos::obtener_tablero(){
 
 }
 
-Objeto* Datos::buscar_objeto(string cuadrante, char nombre){
+int Datos::buscar_objeto(string cuadrante, char nombre){
     
 	size_t indice=0;
 	
@@ -255,10 +252,10 @@ Objeto* Datos::buscar_objeto(string cuadrante, char nombre){
 			indice++;
 	}
 
-	return encontrado ? objetos[indice] : nullptr;
+	return encontrado ? indice : NO_ENCONTRADO;
 }
 
-Objeto* Datos::buscar_objeto(Coordenada posicion){
+int Datos::buscar_objeto(Coordenada posicion){
 
 	size_t indice=0;
 	
@@ -272,12 +269,20 @@ Objeto* Datos::buscar_objeto(Coordenada posicion){
 			indice++;
 	}
 
-	return encontrado ? objetos[indice] : nullptr;
+	return encontrado ? indice : NO_ENCONTRADO;
 
+}
+Objeto* Datos::obtener_objeto(int indice){
+	return objetos[indice];
 }
 
 void Datos::agregar_objeto(Objeto *objeto){
 
 	this->objetos.agregar(objeto);
 	this->tablero->cargar_objeto(objeto);
+}
+
+bool Datos::eliminar_objeto(Coordenada posicion){
+
+	return this->objetos.eliminar(buscar_objeto(posicion)) && this->tablero->eliminar_objeto(posicion);
 }

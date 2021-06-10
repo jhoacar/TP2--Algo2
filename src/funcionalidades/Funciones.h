@@ -1,14 +1,18 @@
 #ifndef FUNCIONES_H
 #define FUNCIONES_H
 
+#include "Lista.h"
+
 #include <string>
 #include <iostream>
 
-using std::cout;
-using std::endl;
-using std::string;
+using namespace std;
 
-#include "Lista.h"
+const size_t CANTIDAD_COLORES = 8; 
+
+enum {ROJO=0,VERDE,AMARILLO,AZUL,VIOLETA,CYAN,BLANCO,RESET};
+
+const string ANSI_COLOR[CANTIDAD_COLORES] = {"\x1b[31m","\x1b[32m","\x1b[33m","\x1b[34m","\x1b[35m","\x1b[36m","\x1b[37m","\x1b[0m"};
 
 const int NO_ENCONTRADO = -1;
 /*
@@ -66,7 +70,11 @@ PRE: Un nombre del fichero a buscar
 POST: Muestra la informacion del fichero en pantalla, validando los caracteres especiales
 */
 bool mostrar_fichero(string name);
-
+/*
+PRE: Un color comprendido en las constantes de colores
+POST: Cambia en la consola el formato de impresion al color de correspondiente
+*/
+void color(int color);
 /*
 PRE: Un vector de datos, un tamaño especifico y un dato a buscar
 POST: Devuelve el indice donde se encontro el dato o NO_ENCONTRADO (-1) en caso contrario
