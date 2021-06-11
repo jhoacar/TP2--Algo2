@@ -1,3 +1,3 @@
 6 14
-humano (10, 10)
-zombi (200, 25)
+humano (5, 5)
+zombi (2, 5)

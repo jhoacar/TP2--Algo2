@@ -5,7 +5,7 @@ APP 		:= TP2
 #Nombre del fichero de salida ya compilado y enlazado
 CPP     	:= g++
 #Compilador del proyecto
-VALGRIND	:= valgrind --leak -check=full --track -origins=yes --show -reachable=yes
+VALGRIND	:= valgrind
 #Chequeo de memoria
 FLAGS 		:= -ggdb -std=c++11 -Wconversion -limits -O0
 #Con la opcion -ggdb para que se agreguen etiquetas de compilacion

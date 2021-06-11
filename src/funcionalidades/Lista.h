@@ -137,7 +137,7 @@ unsigned long Lista<Dato>::obtener_tamano(){
 template <class Dato>
 bool Lista<Dato>::es_valido(const int indice){
 
-	return indice >= 0 && indice <= tamano;
+	return indice >= 0 && indice <= (int)tamano;
 
 }
 
@@ -152,11 +152,11 @@ Nodo<Dato>* Lista<Dato>::buscar_nodo(const int indice){
 	
 	Nodo<Dato> *nodo;
 
-	unsigned long i=0;
+	int i=0;
 
 	nodo=aux;
 
-	while(aux!=nullptr && i<=indice){
+	while(aux!=nullptr && i <= indice){
 
 		nodo=aux;
 
@@ -176,8 +176,8 @@ Dato Lista<Dato>::operator[](const int indice){
 
 	if(nodo != nullptr)
 		return *(nodo->dato);
-	else
-		nullptr;
+	
+	return nullptr;
 }
 
 template <class Dato>

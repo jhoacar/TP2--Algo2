@@ -27,7 +27,7 @@ void pausa(){
 
 void color(int color){
 
-	if(color >= 0 && color< CANTIDAD_COLORES)
+	if(color >= 0 && color< (int)CANTIDAD_COLORES)
 		cout<<ANSI_COLOR[color];
 }
 

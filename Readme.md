@@ -19,6 +19,10 @@ Imagenes
 
 > Proyecto en ejecucion ubicado en el Menu Principal .
 
+![](https://i.ibb.co/MGwy25L/valgrind.jpg)
+
+> Proyecto ya ejecutado con `valgrind` y haciendo chequeo de memoria.
+
 Lista de Clases
 
 + SRC
