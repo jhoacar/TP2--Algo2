@@ -31,6 +31,8 @@ Lista de Clases
 		+ FUNCIONES `Funciones elementales de ejecucion del programa`
 		+ LISTA            `Clase usada para el uso de un vector dinamico`
 		+ NODO           `Clase usada por lista`
+	+ INTERFAZ
+		+ MENU `Clase usada para la interaccion en consola con la informacion`
 	+ OBJETOS
 		+ SERES
 			+ HUMANOS
