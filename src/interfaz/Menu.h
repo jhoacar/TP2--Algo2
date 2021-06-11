@@ -69,6 +69,7 @@ class Menu
 		PRE:
 		POST: Devuelve la opcion de salir (Q) si decide salir
 			o un numero comprendido entre la cantidad de objetos en formato char (n<MAX_OBJETOS)
+			(castear a int si se necesita la informacion del cuadrante).
 		*/
 		char pedir_objeto();
 		/*

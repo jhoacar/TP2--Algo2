@@ -227,12 +227,21 @@ void Menu::menu_buscar_objeto(){
                     
                 if(objeto!=nullptr){
 
-                    cout<<"\n\n\tSe encontro el objeto de Nombre: "<<NOMBRES_STRING[indice_nombre];
-                    cout<<" en la posicion: ( "<<objeto->obtener_posicion().obtener_x()+1<<" , "<<objeto->obtener_posicion().obtener_y()+1<<" )"<<endl;
+                    cout<<"\n\n\tSe encontro el objeto de Nombre: ";
+                    cout<<NOMBRES_STRING[indice_nombre];
+                    cout<<" en la posicion: ( ";
+                    cout<<objeto->obtener_posicion().obtener_x()+1;
+                    cout<<" , ";
+                    cout<<objeto->obtener_posicion().obtener_y()+1;
+                    cout<<" )"<<endl;
 
                 }
-                else
-                    cout<<"\n\n\tNo se encontro el objeto de Nombre: "<<NOMBRES_STRING[indice_nombre]<<" en el Cuadrante: "<<CARDINALES[cuadrante]<<endl;
+                else{
+                    cout<<"\n\n\tNo se encontro el objeto de Nombre: ";
+                    cout<<NOMBRES_STRING[indice_nombre];
+                    cout<<" en el Cuadrante: ";
+                    cout<<CARDINALES[(int)cuadrante]<<endl;
+                }
                 
                 cout<<endl;
                 pausa();
