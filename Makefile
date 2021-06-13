@@ -1,66 +1,100 @@
 # Project: TP2
 # Makefile creado por Jhoan Carrero
 
+#########################################################
+### MACRO DE COMPILACION
+# $(1) : Compilador
+# $(2) : Archivo .o a generar
+# $(3) : Archivo .cpp a compilar
+# $(4) : Dependencias
+# $(5) : Flags del compilador
+define COMPILACION
+$(2) : $(3) $(4)
+	$(1) -c -o $(2) $(3) $(5)
+endef
+#########################################################
+#########################################################
+### MACRO DE TRANSFORMACION ./src(...).cpp -> ./obj(...).o
+# $(1) : Archivo .cpp a transformar
+define TO_OBJ
+$(subst .cpp,.o,$(subst $(SRC),$(OBJ),$(1)))
+endef
+#########################################################
+
+
+##########################################################
+### CONFIGURACION 
 APP 		:= TP2
-#Nombre del fichero de salida ya compilado y enlazado
 CPP     	:= g++
-#Compilador del proyecto
 VALGRIND	:= valgrind
-#Chequeo de memoria
 FLAGS 		:= -ggdb -std=c++11 -Wconversion -O0 -limits -Wall -Werror -pedantic
-#Con la opcion -ggdb para que se agreguen etiquetas de compilacion
-#-stdc=c++11 para compilar las librerias usadas para este proyecto
-#-Wconversion para considerar errores de conversion de tipo de datos
-#-O0 para desactivar optimizacion en la depuracion
-#Banderas de compilacion que muestran en detalle cada error
-MKDIR 		:= mkdir -p
-#Instruccion para crear carpetas y subcarpetas con el uso de -p
 SRC 		:= src
-#Carpeta raiz del proyecto a compilar
 OBJ 		:= obj
-#Carpeta de almacenamiento de ficheros binarios para linkar
 HEADERS		:= ./src/funcionalidades/Funciones.h ./src/funcionalidades/Lista.h ./src/funcionalidades/Nodo.h ./src/objetos/Objeto.h
+###########################################################
 
-ALLCPPS 	:= $(shell find src/ -type f -iname *.cpp)
-#Dado que se permite el uso de script shell realizamos la busqueda (find) en src 
-#Que sea de tipo fichero (-f) con todos los nombres (-iname, mayuscula o no) de extension .cpp (*.cpp)
-ALLOBJECTS 	:= $(patsubst $(SRC)%.cpp,$(OBJ)%.o,$(ALLCPPS)) 
-#Sustituimos de cada archivo el prefijo .cpp por el prefijo .o y la carpeta ./src por ./obj
+ifeq ($(OS),Windows_NT) #WINDOWS ...
+##########################################################
+### SHELL SCRIPT WINDOWS 
+SEARCH_FILES := dir /s/b
+SEARCH_DIRS  := dir $(SRC) /ad /b /s
+DELETE_FILES := rmdir /Q /S 
+MKDIR 		:= mkdir
+##########################################################
+else #LINUX ...
+##########################################################
+### SHELL SCRIPT LINUX 
+SEARCH_FILES := find $(SRC)/ -type f -iname
+SEARCH_DIRS  := find $(SRC)/ -type d
+DELETE_FILES := rm -f -r ./
+MKDIR 		:= mkdir -p
+##########################################################
+endif
 
-SUBDIRS 	:= $(shell find src/ -type d) 
-#Encontramos todas las subcarpetas de los archivos con find pero usando -type d (tipo directorio)
-OBJSUBDIRS	:= $(patsubst $(SRC)%,$(OBJ)%,$(SUBDIRS))
-#Cambiamos a cada subdirectorio que existe la raiz de src por la raiz de obj
+#########################################################
+### EXTRACCION FICHEROS DEL PROYECTO 
+ALLCPPS 	:= $(shell $(SEARCH_FILES) *.cpp)
+ALLOBJECTS 	:= $(subst .cpp,.o,$(subst $(SRC),$(OBJ),$(ALLCPPS)))#sustituimos la carpeta SRC por OBJ y la extencion .cpp por .o
+
+SUBDIRS 	:= $(shell $(SEARCH_DIRS)) 
+OBJSUBDIRS	:= $(subst $(SRC),$(OBJ),$(SUBDIRS))#sustituimos la carpeta SRC por OBJ
+#########################################################
 
 
+########################################################
+### PROCESO DE LINKAR 
 #Al ejecutar make, arrancara a realizar esta operacion
 $(APP): $(OBJSUBDIRS) $(ALLOBJECTS)
 	$(CPP) -o $(APP) $(ALLOBJECTS)
-#La cual se ejecutara cuando tengo resuelto todos los OBJETOS que son todos los *.o
+#La cual se ejecutara cuando tengo resuelto todos los OBJETOS que son todos los *.o y cree todas las carpetas
+########################################################
 
-#Algo que sea obj/...(.o) (obj/%.o) depende de ese mismo nombre pero src/...(.cpp) (src/%.cpp)
-$(OBJ)/%.o:$(SRC)/%.cpp
-	$(CPP) -o $@ -c $^  $(FLAGS)  
-#Generamos el binario con -o
-#El macro $@ es todo antes del : en este caso /obj/%.o
-#El macro $^ son todas las dependencias luego del : en este caso src/%.cpp
-#Compilamos unicamente mediante el flag -c y agregamos otras flags que queramos
+########################################################
+### GENERADOR DE REGLAS PARA CADA .o
+$(foreach FICHERO,$(ALLCPPS),$(eval $(call COMPILACION,$(CPP),$(call TO_OBJ,$(FICHERO)),$(FICHERO),$(HEADERS),$(FLAGS))))
+########################################################
 
 
+########################################################
+### CREANDO LOS SUBDIRECTORIOS ./obj
 $(OBJSUBDIRS):
 	$(MKDIR) $(OBJSUBDIRS)
-#Creo las carpetas donde se guardaran todos los ficheros binarios
+########################################################
 
-
+########################################################
+### ELIMINANDO TODA LA CARPETA ./obj
 clean:
-	rm -f -r ./obj
-#Elimino cada archivo binario
+	$(DELETE_FILES)$(OBJ)
+########################################################
 
+########################################################
+### USO DE LA API VALGRIND PARA EJECUTAR PROYECTO
 valgrind:
 	$(VALGRIND) ./$(APP)
+########################################################
 
-#PHONY es Util para que no sea dependiente y ejecute solo con instruccion make info
+
+#PHONY es Util para que no sea dependiente y ejecute solo con instruccion. Ejemplo: make info
 .PHONY: info
 info:
-	$(shell echo -e \n FICHEROS A COMPILAR: \n\n $(ALLCPPS) \n\n FICHEROS OBJETO: \n\n $(ALLOBJECTS) \n\n LINEA DE COMPILACION (LINKADO FINAL): \n\n $(CPP) -o $(APP) $(ALLOBJECTS) )
-	
+	$(info $(ALLOBJECTS))
