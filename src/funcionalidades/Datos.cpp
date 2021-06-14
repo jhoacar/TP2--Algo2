@@ -46,7 +46,7 @@ Datos::~Datos()
 
 void Datos::cargar_tablero(){
 
-	for(size_t i=0	; i < objetos.obtener_tamano()	;	i++)
+	for(int i=0	; i <(int) objetos.obtener_tamano()	;	i++)
 	
 		this->tablero->cargar_objeto(objetos[i]);
 }
@@ -136,7 +136,7 @@ int Datos::convertir_cantidad(Lista<string> &datos){
 
 void Datos::cargar_objetos(Lista<string> &lineas){
 	
-	for(size_t i=1;	i<lineas.obtener_tamano();	i++){
+	for(int i=1;	i<(int)lineas.obtener_tamano();	i++){
 
 		Lista<string> 	division_datos = dividir_texto(lineas[i],' ');
 
@@ -162,7 +162,7 @@ bool Datos::tiene_cantidad(Objeto *objeto){
 int Datos::obtener_cantidad(int tipo_objeto){
 	int cantidad=0;
 
-	for(size_t i=0;	i<objetos.obtener_tamano();	i++){
+	for(int i=0;	i<(int)objetos.obtener_tamano();	i++){
 
 		if(	this->objetos[i]->obtener_nombre()	==	NOMBRES_CHAR[tipo_objeto]){
 
@@ -223,7 +223,7 @@ string Datos::obtener_resumen(){
 string Datos::obtener_datos(){
 
 	string datos = "";
-	for( size_t i=0; i<objetos.obtener_tamano(); i++){
+	for( int i=0; i<(int)objetos.obtener_tamano(); i++){
 
 		datos+="\nObjeto: "+NOMBRES_STRING[buscar_dato(NOMBRES_CHAR,MAX_NOMBRES,objetos[i]->obtener_nombre())]+"\n";
 		datos+="Posicion: x = "+to_string(objetos[i]->obtener_posicion().obtener_x())+" y = "+to_string(objetos[i]->obtener_posicion().obtener_y())+"\n";
@@ -240,11 +240,11 @@ Tablero* Datos::obtener_tablero(){
 
 int Datos::buscar_objeto(string cuadrante, char nombre){
     
-	size_t indice=0;
+	int indice=0;
 	
 	bool encontrado=false;
 
-	while(!encontrado && indice < objetos.obtener_tamano()){
+	while(!encontrado && indice < (int)objetos.obtener_tamano()){
 
 		if(objetos[indice]->obtener_cuadrante() == cuadrante && objetos[indice]->obtener_nombre() == nombre)
 			encontrado = true;
@@ -257,11 +257,11 @@ int Datos::buscar_objeto(string cuadrante, char nombre){
 
 int Datos::buscar_objeto(Coordenada posicion){
 
-	size_t indice=0;
+	int indice=0;
 	
 	bool encontrado=false;
 
-	while(!encontrado && indice < objetos.obtener_tamano()){
+	while(!encontrado && indice <(int) objetos.obtener_tamano()){
 
 		if(objetos[indice]->obtener_posicion() == posicion)
 			encontrado = true;
